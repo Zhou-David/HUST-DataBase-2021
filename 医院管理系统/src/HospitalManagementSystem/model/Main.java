@@ -7,9 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,15 +23,15 @@ public class Main extends Application {
     /**
      * 界面宽度
      */
-    private final double MINIMUM_WINDOW_WIDTH = 600.0;
+    private double MINIMUM_WINDOW_WIDTH = 600.0;
 
     /**
      * 界面高度
      */
-    private final double MINIMUM_WINDOW_HEIGHT = 400.0;
+    private double MINIMUM_WINDOW_HEIGHT = 400.0;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         stage=primaryStage;
         gotoMain();
         stage.show();
@@ -76,10 +76,13 @@ public class Main extends Application {
     /**
      * 跳转至医师服务界面
      */
-    public void gotoDoctorService(){
+    public void gotoDoctorService(int doctorID){
         try {
+            MINIMUM_WINDOW_WIDTH=800;
             DoctorServiceController doctorServiceController=(DoctorServiceController) replaceSceneContent("../resources/DoctorService.fxml");
-            doctorServiceController.setDoctorServiceApp(this);
+            doctorServiceController.setDoctorServiceApp(this,doctorID);
+            MINIMUM_WINDOW_WIDTH=600;
+            MINIMUM_WINDOW_HEIGHT=400;
         } catch (Exception e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
         }

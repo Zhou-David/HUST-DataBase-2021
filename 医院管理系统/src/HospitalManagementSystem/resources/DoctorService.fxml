@@ -1,14 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="HospitalManagementSystem.controller.DoctorServiceController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HospitalManagementSystem.controller.DoctorServiceController">
+    <TabPane prefHeight="400.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="个人信息">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="589.0">
+                <Button fx:id="btnReturn1" layoutX="250.0" layoutY="290.0" mnemonicParsing="false" onAction="#onClickReturn" prefHeight="43.0" prefWidth="99.0" text="返回上一级" />
+                <FlowPane alignment="CENTER" layoutX="100.0" layoutY="14.0" prefHeight="276.0" prefWidth="300.0" AnchorPane.bottomAnchor="80.66666666666669" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="14.0">
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <CheckBox fx:id="checkExpert" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="29.0" prefWidth="93.0" text="专家">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </CheckBox>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefWidth="65.0" text="姓名" />
+                        <TextField fx:id="fieldName" />
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefWidth="65.0" text="性别" />
+                        <ChoiceBox fx:id="cbxSex" prefWidth="161.33" />
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefHeight="15.0" prefWidth="65.0" text="出生日期" />
+                        <DatePicker fx:id="dateBirthday" prefWidth="161.33" />
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefHeight="15.0" prefWidth="65.0" text="入职日期" />
+                        <DatePicker fx:id="dateWorkingDay" prefWidth="161.33" />
+                    </HBox>
+                </FlowPane>
+                <FlowPane alignment="CENTER" layoutX="400.0" layoutY="14.0" prefHeight="276.0" prefWidth="300.0" AnchorPane.bottomAnchor="80.66666666666669" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="14.0">
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefWidth="65.0" text="所属科室" />
+                        <ChoiceBox fx:id="cbxDepartment" prefWidth="161.33" />
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefWidth="65.0" text="职务" />
+                        <TextField fx:id="fieldJob" />
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefHeight="15.0" prefWidth="65.0" text="电话号码" />
+                        <TextField fx:id="fieldPhone" />
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefHeight="15.0" prefWidth="65.0" text="电子邮箱" />
+                        <TextField fx:id="fieldEmail" />
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="226.0">
+                        <Label alignment="CENTER" prefHeight="15.0" prefWidth="65.0" text="挂号费" />
+                        <TextField fx:id="fieldRegisterFee" />
+                    </HBox>
+                </FlowPane>
+                <Button fx:id="btnSubmit" layoutX="450.0" layoutY="290.0" mnemonicParsing="false" onAction="#onClickSubmit" prefHeight="43.0" prefWidth="99.0" text="保存修改" />
+            </AnchorPane>
+        </Tab>
+        <Tab text="诊断">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </Tab>
+        <Tab text="药品管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </Tab>
+        <Tab text="病房管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </Tab>
+        <Tab text="财务管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </Tab>
+        <Tab text="医师管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TableView fx:id="tabDoctorInfo" layoutY="31.0" prefHeight="340.0" prefWidth="800.0">
+                    <columns>
+                        <TableColumn fx:id="colDoctorName" text="姓名" />
+                        <TableColumn fx:id="colDoctorSex" text="性别" />
+                        <TableColumn fx:id="colDoctorBirthday" text="出生日期" />
+                        <TableColumn fx:id="colDoctorWorkingDay" text="入职日期" />
+                        <TableColumn fx:id="colDoctorDepartment" text="所属科室" />
+                        <TableColumn fx:id="colDoctorJob" text="职务" />
+                  <TableColumn fx:id="colDoctorFee" text="挂号费" />
+                  <TableColumn fx:id="colDoctorPone" text="电话号码" />
+                  <TableColumn fx:id="colDoctorEmail" text="电子邮箱" />
+                  <TableColumn fx:id="colDoctorExpert" text="是否专家" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="0.0">
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索医师姓名" textFill="#e20d0d" />
+                    <TextField fx:id="fieldDoctorSearch" prefHeight="29.0" prefWidth="348.0" />
+                    <Button fx:id="btnDoctorSearch" mnemonicParsing="false" onAction="#onClickDoctorSearch" text="搜索" textFill="#1e08e4" />
+                    <Button fx:id="btnReturn6" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+                </HBox>
+            </AnchorPane>
+        </Tab>
+      <Tab text="科室管理">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+    </TabPane>
 </AnchorPane>

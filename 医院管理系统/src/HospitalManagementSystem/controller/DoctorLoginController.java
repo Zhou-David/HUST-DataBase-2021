@@ -3,10 +3,10 @@ package HospitalManagementSystem.controller;
 import HospitalManagementSystem.function.Func;
 import HospitalManagementSystem.model.Main;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -83,7 +83,7 @@ public class DoctorLoginController implements Initializable {
     public void onClickLogin(ActionEvent event) {
         int id = Func.Check(fieldUser.getText(), fieldPassword.getText());
         if (id > 0) {
-            this.loginApp.gotoDoctorService();
+            this.loginApp.gotoDoctorService(id);
         } else {
             new Alert(Alert.AlertType.INFORMATION, "账户或密码有误，请检查输入").showAndWait();
         }
