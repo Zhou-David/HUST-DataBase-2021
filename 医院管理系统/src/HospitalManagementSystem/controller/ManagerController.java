@@ -86,9 +86,9 @@ public class ManagerController implements Initializable {
     public Button btnDoctorSearch;
 
     /**
-     * 返回按钮6
+     * 返回按钮1
      */
-    public Button btnReturn6;
+    public Button btnReturn1;
 
     /**
      * 药品信息表
@@ -136,9 +136,9 @@ public class ManagerController implements Initializable {
     public Button btnMedicineSearch;
 
     /**
-     * 返回按钮3
+     * 返回按钮2
      */
-    public Button btnReturn3;
+    public Button btnReturn2;
 
     /**
      * 病房信息表
@@ -181,9 +181,9 @@ public class ManagerController implements Initializable {
     public Button btnWardSearch;
 
     /**
-     * 返回按钮4
+     * 返回按钮3
      */
-    public Button btnReturn4;
+    public Button btnReturn3;
 
     /**
      * 科室信息表
@@ -216,9 +216,69 @@ public class ManagerController implements Initializable {
     public Button btnDepartmentSearch;
 
     /**
-     * 返回按钮7
+     * 返回按钮4
      */
-    public Button btnReturn7;
+    public Button btnReturn4;
+
+    /**
+     * 财务报表
+     */
+    public TableView<Finance> tabFinance;
+
+    /**
+     * 财务表-编号
+     */
+    public TableColumn<Finance,String> colFinanceId;
+
+    /**
+     * 财务表-收入来源
+     */
+    public TableColumn<Finance,String> colFinanceFrom;
+
+    /**
+     * 财务表-收入时间
+     */
+    public TableColumn<Finance,String> colFinanceTime;
+
+    /**
+     * 财务表-费用
+     */
+    public TableColumn<Finance,String> colFee;
+
+    /**
+     * 搜索财务来源信息
+     */
+    public TextField fieldIncomeSearch;
+
+    /**
+     * 搜索财务来源按钮
+     */
+    public Button btnIncomeSearch;
+
+    /**
+     * 总收入信息
+     */
+    public Label labTotalIncome;
+
+    /**
+     * 返回按钮5
+     */
+    public Button btnReturn5;
+
+    /**
+     * 药品信息表-药品编号
+     */
+    public TableColumn<Medicine,String> colMedicineId;
+
+    /**
+     * 病房信息表-病房编号
+     */
+    public TableColumn<Ward,String> colWardId;
+
+    /**
+     * 医师信息表-医师编号
+     */
+    public TableColumn<Doctor,String> colDoctorId;
 
     /**
      * 从数据库导入的医师信息数据
@@ -241,6 +301,11 @@ public class ManagerController implements Initializable {
     private final ObservableList<Medicine> medicineData = FXCollections.observableArrayList();
 
     /**
+     * 从数据库导入的药品信息数据
+     */
+    private final ObservableList<Finance> financeData = FXCollections.observableArrayList();
+
+    /**
      * 管理人员界面App
      */
     private Main managerApp;
@@ -249,8 +314,8 @@ public class ManagerController implements Initializable {
      * 设置管理人员界面
      * @param managerApp:管理人员界面APP
      */
-    public void setManagerApp(Main managerApp){
-        this.managerApp=managerApp;
+    public void setManagerApp(Main managerApp) {
+        this.managerApp = managerApp;
 
         //在科室管理中导入数据
         try {
@@ -258,25 +323,25 @@ public class ManagerController implements Initializable {
             sql = "SELECT 科室信息.id, 科室名称, 姓名 FROM 科室信息 JOIN 医生信息 医 on 医.id = 科室信息.系主任";
             ResultSet rs = Func.statement.executeQuery(sql);
             while (rs.next()) {
-                Department department=new Department(
-                        rs.getInt(1),rs.getString(2),rs.getString(3)
+                Department department = new Department(
+                        rs.getInt(1), rs.getString(2), rs.getString(3)
                 );
                 departmentData.add(department);
             }
             setDepartmentData(departmentData);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         //在个人信息和医师管理中导入数据
         try {
             String sql;
-            sql="SELECT 医.id, 姓名, 性别, 出生日期, 入职日期, 科室名称, 职务, 是否为专家, 电话号码, 电子邮箱,挂号费 FROM 医生信息 医 JOIN 科室信息 科 on 医.所属科室 = 科.id";
-            ResultSet rs= Func.statement.executeQuery(sql);
-            while (rs.next()){
-                Doctor doctor=new Doctor(
-                        rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5),
-                        rs.getString(6),rs.getString(7),rs.getInt(8)==1,rs.getString(9),rs.getString(10),
+            sql = "SELECT 医.id, 姓名, 性别, 出生日期, 入职日期, 科室名称, 职务, 是否为专家, 电话号码, 电子邮箱,挂号费 FROM 医生信息 医 JOIN 科室信息 科 on 医.所属科室 = 科.id";
+            ResultSet rs = Func.statement.executeQuery(sql);
+            while (rs.next()) {
+                Doctor doctor = new Doctor(
+                        rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5),
+                        rs.getString(6), rs.getString(7), rs.getInt(8) == 1, rs.getString(9), rs.getString(10),
                         rs.getInt(11));
                 doctorData.add(doctor);
             }
@@ -291,14 +356,14 @@ public class ManagerController implements Initializable {
             sql = "SELECT * FROM 药品信息";
             ResultSet rs = Func.statement.executeQuery(sql);
             while (rs.next()) {
-                Medicine medicine=new Medicine(
-                        rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),
-                        rs.getString(5),rs.getInt(6),rs.getString(7)
+                Medicine medicine = new Medicine(
+                        rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getInt(6), rs.getString(7)
                 );
                 medicineData.add(medicine);
             }
             setMedicineData(medicineData);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -308,16 +373,44 @@ public class ManagerController implements Initializable {
             sql = "SELECT * FROM 病房信息";
             ResultSet rs = Func.statement.executeQuery(sql);
             while (rs.next()) {
-                Ward ward=new Ward(
-                        rs.getInt(1),rs.getString(2),rs.getInt(3),
-                        rs.getString(4),rs.getInt(5),rs.getString(6)
+                Ward ward = new Ward(
+                        rs.getInt(1), rs.getString(2), rs.getInt(3),
+                        rs.getString(4), rs.getInt(5), rs.getString(6)
                 );
                 wardData.add(ward);
             }
             setWardData(wardData);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        int totalIncome=0;
+        //在财务管理中导入数据
+        try {
+            int count=1;
+            String sql;
+            ResultSet rs;
+
+            //获取挂号费信息
+            sql="SELECT 挂号时间,挂号费 FROM 挂号信息";
+            rs=Func.statement.executeQuery(sql);
+            while(rs.next()){
+                Finance finance=new Finance(
+                        count++,"挂号费",
+                        rs.getDate(1)+" "+rs.getTime(1),
+                        rs.getInt(2)
+                );
+                totalIncome+=finance.getFee();
+                financeData.add(finance);
+            }
+
+            setFinanceData(financeData);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //总收入
+        labTotalIncome.setText(""+totalIncome);
     }
 
     /**
@@ -409,11 +502,36 @@ public class ManagerController implements Initializable {
     }
 
     /**
+     * 财务查询
+     */
+    public void onClickFinanceSearch(){
+        //如果搜索栏没有内容，则显示全部数据
+        if(fieldIncomeSearch.getText().equals("")){
+            setFinanceData(financeData);
+        }
+
+        //找到对应房间号的所有病房
+        else {
+            ObservableList<Finance> financeMach = FXCollections.observableArrayList();
+            //查找到对应的病房
+            for (Finance finance : financeData) {
+                if (finance.getIncomeSource().equals(fieldIncomeSearch.getText())) {
+                    financeMach.add(finance);
+                }
+            }
+            setFinanceData(financeMach);
+        }
+    }
+
+    /**
      * 医师数据导入
      * @param doctorData:医师数据
      */
     public void setDoctorData(ObservableList<Doctor> doctorData) {
         //确定数据导入的列
+        colDoctorId.setCellValueFactory(
+                doctorStringCellDataFeatures -> new SimpleStringProperty(""+doctorStringCellDataFeatures.getValue().getId())
+        );
         colDoctorName.setCellValueFactory(
                 doctorStringCellDataFeatures -> new SimpleStringProperty(doctorStringCellDataFeatures.getValue().getName())
         );
@@ -486,6 +604,9 @@ public class ManagerController implements Initializable {
         colMedicineType.setCellValueFactory(
                 medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getType())
         );
+        colMedicineId.setCellValueFactory(
+                medicineStringCellDataFeatures -> new SimpleStringProperty(""+medicineStringCellDataFeatures.getValue().getId())
+        );
 
         //向表中导入数据
         tabMedicineInfo.setItems(medicineData);
@@ -499,15 +620,42 @@ public class ManagerController implements Initializable {
     private void setWardData(ObservableList<Ward> wardData) {
         //确定数据导入的列
         Func.setWardData(colWardRoomNum,colWardCapacity,colWardType,colWardUsed,colWardRemarks);
+        colWardId.setCellValueFactory(
+                wardStringCellDataFeatures -> new SimpleStringProperty(""+wardStringCellDataFeatures.getValue().getId())
+        );
 
         //向表中导入数据
         tabWardInfo.setItems(wardData);
     }
 
     /**
+     * 科室数据导入
+     * @param financeData:科室数据
+     */
+    public void setFinanceData(ObservableList<Finance> financeData){
+        //确定导入数据的列
+        colFinanceId.setCellValueFactory(
+                financeIntegerCellDataFeatures -> new SimpleStringProperty(""+financeIntegerCellDataFeatures.getValue().getId())
+        );
+        colFinanceFrom.setCellValueFactory(
+                financeStringCellDataFeatures -> new SimpleStringProperty(financeStringCellDataFeatures.getValue().getIncomeSource())
+        );
+        colFinanceTime.setCellValueFactory(
+                financeStringCellDataFeatures -> new SimpleStringProperty(financeStringCellDataFeatures.getValue().getIncomeTime())
+        );
+        colFee.setCellValueFactory(
+                financeStringCellDataFeatures -> new SimpleStringProperty(""+financeStringCellDataFeatures.getValue().getFee())
+        );
+
+        //向表中导入数据
+        tabFinance.setItems(financeData);
+    }
+
+    /**
      * 修改表格内容后，对数据库内容进行修改
      */
     public void onEditMedicine() {
+        System.out.println(colMedicineName.getCellObservableValue(1).getValue());
         new Alert(Alert.AlertType.INFORMATION, "修改成功").showAndWait();
     }
 
