@@ -9,38 +9,32 @@ public class Medicine {
     /**
      * 药品名称
      */
-    private String name;
+    private final String name;
 
     /**
      * 剂型
      */
-    private String dosageForm;
+    private final String dosageForm;
 
     /**
      * 规格
      */
-    private String specifications;
+    private final String specifications;
 
     /**
      * 使用说明
      */
-    private String introduction;
+    private final String introduction;
 
     /**
      * 参考价格
      */
-    private int price;
+    private final int price;
 
     /**
      * 产品类别
      */
-    private String type;
-
-    /**
-     * 缺省构造函数
-     */
-    public Medicine() {
-    }
+    private final String type;
 
     /**
      * 构造函数
@@ -87,27 +81,11 @@ public class Medicine {
     }
 
     /**
-     * 设置产品名称
-     * @param name:药品名称
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * 获取产品剂型
      * @return :药品剂型
      */
     public String getDosageForm() {
         return dosageForm;
-    }
-
-    /**
-     * 设置产品剂型
-     * @param dosageForm:药品剂型
-     */
-    public void setDosageForm(String dosageForm) {
-        this.dosageForm = dosageForm;
     }
 
     /**
@@ -119,27 +97,11 @@ public class Medicine {
     }
 
     /**
-     * 设置产品规格
-     * @param specifications:药品规格
-     */
-    public void setSpecifications(String specifications) {
-        this.specifications = specifications;
-    }
-
-    /**
      * 获取使用说明
      * @return :使用说明
      */
     public String getIntroduction() {
         return introduction;
-    }
-
-    /**
-     * 设置使用说明
-     * @param introduction:使用说明
-     */
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
     }
 
     /**
@@ -151,14 +113,6 @@ public class Medicine {
     }
 
     /**
-     * 设置参考价格
-     * @param price:参考价格
-     */
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    /**
      * 获取产品类别
      * @return :药品类别
      */
@@ -167,13 +121,9 @@ public class Medicine {
     }
 
     /**
-     * 设置产品类别
-     * @param type:药品类别
+     * 转换成字符串输出
+     * @return :药品信息
      */
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
         return "Medicine{" +

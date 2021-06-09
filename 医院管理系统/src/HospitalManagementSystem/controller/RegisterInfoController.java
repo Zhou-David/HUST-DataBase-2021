@@ -4,7 +4,6 @@ import HospitalManagementSystem.function.Func;
 import HospitalManagementSystem.model.Doctor;
 import HospitalManagementSystem.model.Main;
 import HospitalManagementSystem.model.Patient;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -83,9 +82,8 @@ public class RegisterInfoController implements Initializable {
 
     /**
      * 返回上一级
-     * @param actionEvent:触发事件
      */
-    public void onClickReturn(ActionEvent actionEvent){
+    public void onClickReturn(){
         this.registerInfoApp.gotoService();
     }
 

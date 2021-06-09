@@ -9,10 +9,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -226,9 +224,8 @@ public class ServiceController implements Initializable {
 
     /**
      * 选择性别栏
-     * @param mouseEvent:触发事件
      */
-    public void onPressedSex(MouseEvent mouseEvent) {
+    public void onPressedSex() {
         //只用添加一次，因此当内容数量大于0时返回
         if(cbxSex.getItems().size()>0){
             return;
@@ -240,9 +237,8 @@ public class ServiceController implements Initializable {
 
     /**
      * 选择科室栏
-     * @param mouseEvent:触发事件
      */
-    public void onPressedDepartment(MouseEvent mouseEvent) {
+    public void onPressedDepartment() {
         //每次选择科室时都要清空医师选项
         cbxDoctor.getItems().clear();
 
@@ -271,9 +267,8 @@ public class ServiceController implements Initializable {
 
     /**
      * 选择性别栏
-     * @param mouseEvent:触发事件
      */
-    public void onPressedDoctor(MouseEvent mouseEvent) {
+    public void onPressedDoctor() {
         String department=cbxDepartment.getValue();
 
         //如果已经选择了科室，则只添加对应科室的医师
@@ -303,17 +298,15 @@ public class ServiceController implements Initializable {
 
     /**
      * 返回上一级
-     * @param actionEvent:触发事件
      */
-    public void onClickReturn(ActionEvent actionEvent){
+    public void onClickReturn(){
         this.serviceApp.gotoMain();
     }
 
     /**
      * 挂号
-     * @param actionEvent:触发事件
      */
-    public void onClickSubmit(ActionEvent actionEvent) {
+    public void onClickSubmit() {
         String patientName=fieldName.getText();
         String patientSex=cbxSex.getValue();
         String patientIDCard=fieldIDCard.getText();
@@ -413,9 +406,8 @@ public class ServiceController implements Initializable {
 
     /**
      * 医生信息查询
-     * @param actionEvent:触发事件
      */
-    public void onClickDoctorSearch(ActionEvent actionEvent) {
+    public void onClickDoctorSearch() {
         //如果搜索栏没有内容，则显示全部数据
         if(fieldDoctorSearch.getText().equals("")){
             setDoctorData(doctorData);
@@ -436,9 +428,8 @@ public class ServiceController implements Initializable {
 
     /**
      * 药品信息查询
-     * @param actionEvent:触发事件
      */
-    public void onClickMedicineSearch(ActionEvent actionEvent) {
+    public void onClickMedicineSearch() {
         //如果搜索栏没有内容，则显示全部数据
         if(fieldMedicineSearch.getText().equals("")){
             setMedicineData(medicineData);
@@ -459,9 +450,8 @@ public class ServiceController implements Initializable {
 
     /**
      * 病房信息查询
-     * @param actionEvent:触发事件
      */
-    public void onClickWarnSearch(ActionEvent actionEvent) {
+    public void onClickWarnSearch() {
         //如果搜索栏没有内容，则显示全部数据
         if(fieldWardSearch.getText().equals("")){
             setWardData(wardData);
@@ -520,21 +510,7 @@ public class ServiceController implements Initializable {
      */
     private void setMedicineData(ObservableList<Medicine> medicineData) {
         //确定数据导入的列
-        colMedicineName.setCellValueFactory(
-                medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getName())
-        );
-        colMedicineDosage.setCellValueFactory(
-                medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getDosageForm())
-        );
-        colMedicineSpecifications.setCellValueFactory(
-                medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getSpecifications())
-        );
-        colMedicineIntroduction.setCellValueFactory(
-                medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getIntroduction())
-        );
-        colMedicinePrice.setCellValueFactory(
-                medicineStringCellDataFeatures -> new SimpleIntegerProperty(medicineStringCellDataFeatures.getValue().getPrice()).asObject()
-        );
+        Func.setMedicineData(colMedicineName, colMedicineDosage, colMedicineSpecifications, colMedicineIntroduction, colMedicinePrice);
 
         //向表中导入数据
         tabMedicineInfo.setItems(medicineData);
@@ -546,21 +522,7 @@ public class ServiceController implements Initializable {
      */
     private void setWardData(ObservableList<Ward> wardData){
         //确定数据导入的列
-        colWardNumber.setCellValueFactory(
-                wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getNumber())
-        );
-        colWardCapacity.setCellValueFactory(
-                wardIntegerCellDataFeatures -> new SimpleIntegerProperty(wardIntegerCellDataFeatures.getValue().getCapacity()).asObject()
-        );
-        colWardType.setCellValueFactory(
-                wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getType())
-        );
-        colWardUsed.setCellValueFactory(
-                wardIntegerCellDataFeatures -> new SimpleIntegerProperty(wardIntegerCellDataFeatures.getValue().getUsed()).asObject()
-        );
-        colWardRemarks.setCellValueFactory(
-                wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getRemarks())
-        );
+        Func.setWardData(colWardNumber,colWardCapacity,colWardType,colWardUsed,colWardRemarks);
 
         //向表中导入数据
         tabWardInfo.setItems(wardData);

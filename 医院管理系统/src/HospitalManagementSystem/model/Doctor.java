@@ -1,10 +1,6 @@
 package HospitalManagementSystem.model;
 
 import HospitalManagementSystem.function.Func;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 import java.util.Date;
 
@@ -122,14 +118,6 @@ public class Doctor {
     }
 
     /**
-     * 设置人员姓名
-     * @param name:医师人员姓名
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * 获取人员性别
      * @return :医师人员性别
      */
@@ -138,27 +126,11 @@ public class Doctor {
     }
 
     /**
-     * 设置人员性别
-     * @param sex:医师人员性别
-     */
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    /**
      * 获取人员出生日期
      * @return :医师人员出生日期
      */
     public Date getBirthday() {
         return birthday;
-    }
-
-    /**
-     * 设置人员出生日期
-     * @param birthday:医师人员出生日期
-     */
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
     }
 
     /**
@@ -178,14 +150,6 @@ public class Doctor {
     }
 
     /**
-     * 设置人员从业日期
-     * @param workingDay:医师人员从业日期
-     */
-    public void setWorkingDay(Date workingDay) {
-        this.workingDay = workingDay;
-    }
-
-    /**
      * 获取人员从业年限
      */
     public int getWorkingYear(){
@@ -201,27 +165,11 @@ public class Doctor {
     }
 
     /**
-     * 设置人员所属科室
-     * @param department:医师人员所属科室
-     */
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    /**
      * 获取人员职务
      * @return :获取医师人员职务
      */
     public String getJob() {
         return job;
-    }
-
-    /**
-     * 设置人员职务
-     * @param job:设置医师人员职务
-     */
-    public void setJob(String job) {
-        this.job = job;
     }
 
     /**
@@ -233,27 +181,11 @@ public class Doctor {
     }
 
     /**
-     * 设置是否为专家
-     * @param isExpert:1表示为专家，0表示不是专家
-     */
-    public void setIsExpert(boolean isExpert) {
-        this.isExpert = isExpert;
-    }
-
-    /**
      * 获取人员电话号码
      * @return :医师人员电话号码
      */
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    /**
-     * 设置人员电话号码
-     * @param phoneNumber:医师人员电话号码
-     */
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     /**
@@ -265,14 +197,6 @@ public class Doctor {
     }
 
     /**
-     * 设置人员电子邮箱
-     * @param email:医师人员电子邮箱
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
      * 获取挂号费
      * @return :挂号费
      */
@@ -281,13 +205,9 @@ public class Doctor {
     }
 
     /**
-     * 设置挂号费
-     * @param registerFee:挂号费
+     * 转换成字符串输出
+     * @return :医师信息
      */
-    public void setRegisterFee(int registerFee) {
-        this.registerFee = registerFee;
-    }
-
     @Override
     public String toString() {
         return "Doctor{" +

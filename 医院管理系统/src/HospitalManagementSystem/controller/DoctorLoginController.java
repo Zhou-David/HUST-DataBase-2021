@@ -2,7 +2,6 @@ package HospitalManagementSystem.controller;
 
 import HospitalManagementSystem.function.Func;
 import HospitalManagementSystem.model.Main;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -78,12 +77,23 @@ public class DoctorLoginController implements Initializable {
 
     /**
      * 登录
-     * @param event:触发事件
      */
-    public void onClickLogin(ActionEvent event) {
+    public void onClickLogin() {
         int id = Func.Check(fieldUser.getText(), fieldPassword.getText());
         if (id > 0) {
-            this.loginApp.gotoDoctorService(id);
+            try {
+                String sql="SELECT 权限等级 FROM 用户 WHERE id="+id;
+                ResultSet rs=Func.statement.executeQuery(sql);
+                rs.next();
+                if(rs.getInt(1)==0) {
+                    this.loginApp.gotoDoctorService(id);
+                }
+                else{
+                    this.loginApp.gotoManager();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         } else {
             new Alert(Alert.AlertType.INFORMATION, "账户或密码有误，请检查输入").showAndWait();
         }
@@ -91,9 +101,8 @@ public class DoctorLoginController implements Initializable {
 
     /**
      * 注册
-     * @param event:触发事件
      */
-    public void onClickRegister(ActionEvent event) {
+    public void onClickRegister() {
         if(fieldUser.getText().equals("")||fieldPassword.getText().equals("")){
             new Alert(Alert.AlertType.INFORMATION, "注册失败！请填写完整的用户名和密码").showAndWait();
             return;
@@ -129,9 +138,8 @@ public class DoctorLoginController implements Initializable {
 
     /**
      * 返回上一级
-     * @param event:触发事件
      */
-    public void onClickReturn(ActionEvent event){
+    public void onClickReturn(){
         this.loginApp.gotoMain();
     }
 

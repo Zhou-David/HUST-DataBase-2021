@@ -78,9 +78,21 @@ public class Main extends Application {
      */
     public void gotoDoctorService(int doctorID){
         try {
-            MINIMUM_WINDOW_WIDTH=800;
             DoctorServiceController doctorServiceController=(DoctorServiceController) replaceSceneContent("../resources/DoctorService.fxml");
             doctorServiceController.setDoctorServiceApp(this,doctorID);
+        } catch (Exception e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
+        }
+    }
+
+    /**
+     * 跳转至管理界面
+     */
+    public void gotoManager(){
+        try {
+            MINIMUM_WINDOW_WIDTH=800;
+            ManagerController managerController=(ManagerController) replaceSceneContent("../resources/Manager.fxml");
+            managerController.setManagerApp(this);
             MINIMUM_WINDOW_WIDTH=600;
             MINIMUM_WINDOW_HEIGHT=400;
         } catch (Exception e) {

@@ -1,5 +1,11 @@
 package HospitalManagementSystem.function;
 
+import HospitalManagementSystem.model.Medicine;
+import HospitalManagementSystem.model.Ward;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.TableColumn;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -128,5 +134,57 @@ public class Func {
             throwables.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 确定药品数据导入的列
+     * @param colMedicineName:名称
+     * @param colMedicineDosage:剂型
+     * @param colMedicineSpecifications:规格
+     * @param colMedicineIntroduction:使用说明
+     * @param colMedicinePrice:参考价格
+     */
+    public static void setMedicineData(TableColumn<Medicine, String> colMedicineName, TableColumn<Medicine, String> colMedicineDosage, TableColumn<Medicine, String> colMedicineSpecifications, TableColumn<Medicine, String> colMedicineIntroduction, TableColumn<Medicine, Integer> colMedicinePrice) {
+        colMedicineName.setCellValueFactory(
+                medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getName())
+        );
+        colMedicineDosage.setCellValueFactory(
+                medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getDosageForm())
+        );
+        colMedicineSpecifications.setCellValueFactory(
+                medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getSpecifications())
+        );
+        colMedicineIntroduction.setCellValueFactory(
+                medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getIntroduction())
+        );
+        colMedicinePrice.setCellValueFactory(
+                medicineStringCellDataFeatures -> new SimpleIntegerProperty(medicineStringCellDataFeatures.getValue().getPrice()).asObject()
+        );
+    }
+
+    /**
+     * 确定病房数据导入的列
+     * @param colWardRoomNum:病房号
+     * @param colWardCapacity:容量
+     * @param colWardType:类型
+     * @param colWardUsed:入住人数
+     * @param colWardRemarks:备注
+     */
+    public static void setWardData(TableColumn<Ward,String> colWardRoomNum,TableColumn<Ward,Integer> colWardCapacity,TableColumn<Ward,String> colWardType,TableColumn<Ward,Integer> colWardUsed,TableColumn<Ward,String> colWardRemarks){
+        colWardRoomNum.setCellValueFactory(
+                wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getNumber())
+        );
+        colWardCapacity.setCellValueFactory(
+                wardIntegerCellDataFeatures -> new SimpleIntegerProperty(wardIntegerCellDataFeatures.getValue().getCapacity()).asObject()
+        );
+        colWardType.setCellValueFactory(
+                wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getType())
+        );
+        colWardUsed.setCellValueFactory(
+                wardIntegerCellDataFeatures -> new SimpleIntegerProperty(wardIntegerCellDataFeatures.getValue().getUsed()).asObject()
+        );
+        colWardRemarks.setCellValueFactory(
+                wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getRemarks())
+        );
     }
 }

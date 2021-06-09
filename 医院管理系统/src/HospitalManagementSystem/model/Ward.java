@@ -9,33 +9,27 @@ public class Ward {
     /**
      * 房间门牌号
      */
-    private String number;
+    private final String number;
 
     /**
      * 房间容量
      */
-    private int capacity;
+    private final int capacity;
 
     /**
      * 房间类型
      */
-    private String type;
+    private final String type;
 
     /**
      * 入住人数
      */
-    private int used;
+    private final int used;
 
     /**
      * 备注
      */
-    private String remarks;
-
-    /**
-     * 缺省构造函数
-     */
-    public Ward(){
-    }
+    private final String remarks;
 
     /**
      * 构造函数
@@ -55,51 +49,59 @@ public class Ward {
         this.remarks = remarks;
     }
 
+    /**
+     * 获取病房id
+     * @return :病房id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * 设置病房id
+     * @param id:病房id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * 获取门牌号
+     * @return :门牌号
+     */
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
+    /**
+     * 获取病房容量
+     * @return :病房容量
+     */
     public int getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
+    /**
+     * 获取病房类型
+     * @return :病房类型
+     */
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
+    /**
+     * 获取入住人数
+     * @return :入住人数
+     */
     public int getUsed() {
         return used;
     }
 
-    public void setUsed(int used) {
-        this.used = used;
-    }
-
+    /**
+     * 获取备注
+     * @return :备注
+     */
     public String getRemarks() {
         return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
     }
 }

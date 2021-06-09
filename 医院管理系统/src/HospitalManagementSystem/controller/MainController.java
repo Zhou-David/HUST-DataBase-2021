@@ -1,7 +1,6 @@
 package HospitalManagementSystem.controller;
 
 import HospitalManagementSystem.model.Main;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -44,17 +43,15 @@ public class MainController implements Initializable {
 
     /**
      * 点击医师登陆后进行的操作
-     * @param actionEvent:触发事件
      */
-    public void onClickLogin(ActionEvent actionEvent){
+    public void onClickLogin(){
         this.myApp.gotoDoctorLogin();
     }
 
     /**
      * 点击看病服务后进行的操作
-     * @param actionEvent:触发事件
      */
-    public void onClickService(ActionEvent actionEvent) {
+    public void onClickService() {
         this.myApp.gotoService();
     }
 
