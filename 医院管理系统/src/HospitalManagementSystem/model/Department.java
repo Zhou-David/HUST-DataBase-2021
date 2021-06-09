@@ -1,5 +1,8 @@
 package HospitalManagementSystem.model;
 
+/**
+ * 科室类型
+ */
 public class Department {
     /**
      * 科室id

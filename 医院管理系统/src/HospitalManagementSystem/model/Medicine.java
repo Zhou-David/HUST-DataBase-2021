@@ -1,5 +1,8 @@
 package HospitalManagementSystem.model;
 
+/**
+ * 药品类型
+ */
 public class Medicine {
     /**
      * 药品id

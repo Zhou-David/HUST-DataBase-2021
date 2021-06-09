@@ -88,7 +88,7 @@
                     <columns>
                         <TableColumn fx:id="colDoctorName" prefWidth="100.0" text="姓名" />
                         <TableColumn fx:id="colDoctorAge" prefWidth="100.0" text="年龄" />
-                        <TableColumn fx:id="colDoctorWorking" prefWidth="100.0" text="从业时长" />
+                        <TableColumn fx:id="colDoctorWorking" prefWidth="100.0" text="从业时长/年" />
                         <TableColumn fx:id="colDoctorDepartment" prefWidth="100.0" text="科室" />
                         <TableColumn fx:id="colDoctorLevel" prefWidth="100.0" text="级别" />
                         <TableColumn fx:id="colDoctorFee" prefWidth="100.0" text="挂号费" />

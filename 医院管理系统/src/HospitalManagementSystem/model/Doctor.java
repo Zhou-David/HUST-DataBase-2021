@@ -4,6 +4,9 @@ import HospitalManagementSystem.function.Func;
 
 import java.util.Date;
 
+/**
+ * 医师类型
+ */
 public class Doctor {
     /**
      * 医生人员编号
@@ -78,6 +81,7 @@ public class Doctor {
      * @param isExpert:是否为专家
      * @param phoneNumber:电话号码
      * @param email:电子邮箱
+     * @param registerFee:挂号费
      */
     public Doctor(int id, String name, String sex, Date birthday, Date workingDay, String department, String job, boolean isExpert, String phoneNumber, String email,int registerFee) {
         this.id = id;
@@ -151,6 +155,7 @@ public class Doctor {
 
     /**
      * 获取人员从业年限
+     * @return :从业年限
      */
     public int getWorkingYear(){
         return Func.getYear(this.workingDay);

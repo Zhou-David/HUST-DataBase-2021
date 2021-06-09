@@ -14,6 +14,9 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * 主类
+ */
 public class Main extends Application {
     /**
      * 界面
@@ -75,6 +78,7 @@ public class Main extends Application {
 
     /**
      * 跳转至医师服务界面
+     * @param doctorID:医师人员id
      */
     public void gotoDoctorService(int doctorID){
         try {
@@ -102,6 +106,7 @@ public class Main extends Application {
 
     /**
      * 跳转至挂号信息界面
+     * @param registerNum:挂号单号
      */
     public void gotoRegister(int registerNum){
         try {
@@ -135,7 +140,10 @@ public class Main extends Application {
         return loader.getController();
     }
 
-
+    /**
+     * 主函数
+     * @param args :参数
+     */
     public static void main(String[] args) {
         //连接到数据库
         Func.ConnectToDataBase();

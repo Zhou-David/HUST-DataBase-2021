@@ -15,21 +15,80 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+/**
+ * 挂号信息界面控制器
+ */
 public class RegisterInfoController implements Initializable {
+    /**
+     * 病人姓名
+     */
     public TextField fieldPatientName;
+
+    /**
+     * 病人性别
+     */
     public TextField fieldPatientSex;
+
+    /**
+     * 病人年龄
+     */
     public TextField fieldPatientAge;
+
+    /**
+     * 病人电话号码
+     */
     public TextField fieldPatientPhone;
+
+    /**
+     * 医师姓名
+     */
     public TextField fieldDoctorName;
+
+    /**
+     * 医师所属科室
+     */
     public TextField fieldDoctorDepartment;
+
+    /**
+     * 医师职务
+     */
     public TextField fieldDoctorJob;
+
+    /**
+     * 医师挂号费
+     */
     public TextField fieldRegisterFee;
+
+    /**
+     * 返回按钮
+     */
     public Button btnReturn;
+
+    /**
+     * 挂号单号信息
+     */
     public Label labRegisterNum;
+
+    /**
+     * 挂号时间信息
+     */
     public Label labRegisterTime;
+
+    /**
+     * 是否为专家号信息
+     */
     public Label labIsExpert;
+
+    /**
+     * 挂号信息界面App
+     */
     private Main registerInfoApp;
 
+    /**
+     * 设置挂号信息界面
+     * @param registerInfoApp:挂号信息界面App
+     * @param registerNum:挂号信息单号
+     */
     public void setRegisterInfoApp(Main registerInfoApp,int registerNum) {
         this.registerInfoApp = registerInfoApp;
 
@@ -87,6 +146,11 @@ public class RegisterInfoController implements Initializable {
         this.registerInfoApp.gotoService();
     }
 
+    /**
+     * 初始化
+     * @param url:
+     * @param resourceBundle:
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

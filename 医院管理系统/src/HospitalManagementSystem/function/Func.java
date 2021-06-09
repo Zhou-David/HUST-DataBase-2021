@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * 医院系统函数
+ */
 public class Func {
     /**
      * JDBC驱动
@@ -144,7 +147,7 @@ public class Func {
      * @param colMedicineIntroduction:使用说明
      * @param colMedicinePrice:参考价格
      */
-    public static void setMedicineData(TableColumn<Medicine, String> colMedicineName, TableColumn<Medicine, String> colMedicineDosage, TableColumn<Medicine, String> colMedicineSpecifications, TableColumn<Medicine, String> colMedicineIntroduction, TableColumn<Medicine, Integer> colMedicinePrice) {
+    public static void setMedicineData(TableColumn<Medicine, String> colMedicineName, TableColumn<Medicine, String> colMedicineDosage, TableColumn<Medicine, String> colMedicineSpecifications, TableColumn<Medicine, String> colMedicineIntroduction, TableColumn<Medicine, String> colMedicinePrice) {
         colMedicineName.setCellValueFactory(
                 medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getName())
         );
@@ -158,7 +161,7 @@ public class Func {
                 medicineStringCellDataFeatures -> new SimpleStringProperty(medicineStringCellDataFeatures.getValue().getIntroduction())
         );
         colMedicinePrice.setCellValueFactory(
-                medicineStringCellDataFeatures -> new SimpleIntegerProperty(medicineStringCellDataFeatures.getValue().getPrice()).asObject()
+                medicineStringCellDataFeatures -> new SimpleStringProperty(""+medicineStringCellDataFeatures.getValue().getPrice())
         );
     }
 
@@ -170,18 +173,18 @@ public class Func {
      * @param colWardUsed:入住人数
      * @param colWardRemarks:备注
      */
-    public static void setWardData(TableColumn<Ward,String> colWardRoomNum,TableColumn<Ward,Integer> colWardCapacity,TableColumn<Ward,String> colWardType,TableColumn<Ward,Integer> colWardUsed,TableColumn<Ward,String> colWardRemarks){
+    public static void setWardData(TableColumn<Ward,String> colWardRoomNum,TableColumn<Ward,String> colWardCapacity,TableColumn<Ward,String> colWardType,TableColumn<Ward,String> colWardUsed,TableColumn<Ward,String> colWardRemarks){
         colWardRoomNum.setCellValueFactory(
                 wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getNumber())
         );
         colWardCapacity.setCellValueFactory(
-                wardIntegerCellDataFeatures -> new SimpleIntegerProperty(wardIntegerCellDataFeatures.getValue().getCapacity()).asObject()
+                wardIntegerCellDataFeatures -> new SimpleStringProperty(""+wardIntegerCellDataFeatures.getValue().getCapacity())
         );
         colWardType.setCellValueFactory(
                 wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getType())
         );
         colWardUsed.setCellValueFactory(
-                wardIntegerCellDataFeatures -> new SimpleIntegerProperty(wardIntegerCellDataFeatures.getValue().getUsed()).asObject()
+                wardIntegerCellDataFeatures -> new SimpleStringProperty(""+wardIntegerCellDataFeatures.getValue().getUsed())
         );
         colWardRemarks.setCellValueFactory(
                 wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getRemarks())

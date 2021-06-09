@@ -7,6 +7,9 @@ import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * 主界面控制器
+ */
 public class MainController implements Initializable {
     /**
      * 医师登陆块

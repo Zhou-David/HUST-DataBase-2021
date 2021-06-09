@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * 医师登录界面控制器
+ */
 public class DoctorLoginController implements Initializable {
     /**
      * 登陆界面App
@@ -82,11 +85,12 @@ public class DoctorLoginController implements Initializable {
         int id = Func.Check(fieldUser.getText(), fieldPassword.getText());
         if (id > 0) {
             try {
-                String sql="SELECT 权限等级 FROM 用户 WHERE id="+id;
+                String sql="SELECT 医师 FROM 用户 WHERE id="+id;
                 ResultSet rs=Func.statement.executeQuery(sql);
                 rs.next();
-                if(rs.getInt(1)==0) {
-                    this.loginApp.gotoDoctorService(id);
+                int doctorId=rs.getInt(1);
+                if(doctorId>0) {
+                    this.loginApp.gotoDoctorService(doctorId);
                 }
                 else{
                     this.loginApp.gotoManager();
@@ -128,7 +132,7 @@ public class DoctorLoginController implements Initializable {
             int userNum = rs.getInt("NUM");
 
             //添加新的用户
-            sql = "INSERT INTO 用户 VALUES("+(userNum+1)+ ",'" +fieldUser.getText()+"','"+fieldPassword.getText()+"',0)";
+            sql = "INSERT INTO 用户 VALUES("+(userNum+1)+ ",'" +fieldUser.getText()+"','"+fieldPassword.getText()+"',0,0)";
             int len = Func.statement.executeUpdate(sql);
             new Alert(Alert.AlertType.INFORMATION, len>0?"注册成功":"注册失败").showAndWait();
         } catch (SQLException throwables) {

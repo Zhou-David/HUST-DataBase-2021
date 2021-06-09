@@ -1,5 +1,8 @@
 package HospitalManagementSystem.model;
 
+/**
+ * 病房类型
+ */
 public class Ward {
     /**
      * 房间编号

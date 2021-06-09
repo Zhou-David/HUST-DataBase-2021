@@ -7,16 +7,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
+/**
+ * 管理人员界面控制器
+ */
 public class ManagerController implements Initializable {
     /**
      * 医师信息表
@@ -24,17 +26,53 @@ public class ManagerController implements Initializable {
     public TableView<Doctor> tabDoctorInfo;
 
     /**
-     * 医师信息表中的各个列
+     * 医师信息表中-姓名
      */
     public TableColumn<Doctor,String> colDoctorName;
+
+    /**
+     * 医师信息表-性别
+     */
     public TableColumn<Doctor,String> colDoctorSex;
+
+    /**
+     * 医师信息表-出生日期
+     */
     public TableColumn<Doctor,String> colDoctorBirthday;
+
+    /**
+     * 医师信息表-工作日期
+     */
     public TableColumn<Doctor,String> colDoctorWorkingDay;
+
+    /**
+     * 医师信息表-所属科室
+     */
     public TableColumn<Doctor,String> colDoctorDepartment;
+
+    /**
+     * 医师信息表-职务
+     */
     public TableColumn<Doctor,String> colDoctorJob;
-    public TableColumn<Doctor,Integer> colDoctorFee;
+
+    /**
+     * 医师信息表-挂号费
+     */
+    public TableColumn<Doctor,String> colDoctorFee;
+
+    /**
+     * 医师信息表-电话号码
+     */
     public TableColumn<Doctor,String> colDoctorPone;
+
+    /**
+     * 医师信息表-电子邮箱
+     */
     public TableColumn<Doctor,String> colDoctorEmail;
+
+    /**
+     * 医师信息表-是否为专家
+     */
     public TableColumn<Doctor,String> colDoctorExpert;
 
     /**
@@ -58,13 +96,33 @@ public class ManagerController implements Initializable {
     public TableView<Medicine> tabMedicineInfo;
 
     /**
-     * 药品信息的各个列
+     * 药品信息表-名称
      */
     public TableColumn<Medicine,String> colMedicineName;
+
+    /**
+     * 药品信息表-剂型
+     */
     public TableColumn<Medicine,String> colMedicineDosage;
+
+    /**
+     * 药品信息表-规格
+     */
     public TableColumn<Medicine,String> colMedicineSpecifications;
+
+    /**
+     * 药品信息表-使用说明
+     */
     public TableColumn<Medicine,String> colMedicineIntroduction;
-    public TableColumn<Medicine,Integer> colMedicinePrice;
+
+    /**
+     * 药品信息表-参考价格
+     */
+    public TableColumn<Medicine,String> colMedicinePrice;
+
+    /**
+     * 药品信息表-药品类型
+     */
     public TableColumn<Medicine,String> colMedicineType;
 
     /**
@@ -91,9 +149,25 @@ public class ManagerController implements Initializable {
      * 病房信息表的各个列
      */
     public TableColumn<Ward,String> colWardRoomNum;
-    public TableColumn<Ward,Integer> colWardCapacity;
+
+    /**
+     * 病房信息表-房间容量
+     */
+    public TableColumn<Ward,String> colWardCapacity;
+
+    /**
+     * 病房信息表-病房类型
+     */
     public TableColumn<Ward,String> colWardType;
-    public TableColumn<Ward,Integer> colWardUsed;
+
+    /**
+     * 病房信息表-入住人数
+     */
+    public TableColumn<Ward,String> colWardUsed;
+
+    /**
+     * 病房信息表-备注
+     */
     public TableColumn<Ward,String> colWardRemarks;
 
     /**
@@ -117,10 +191,18 @@ public class ManagerController implements Initializable {
     public TableView<Department> tabDepartmentInfo;
 
     /**
-     * 科室信息表的各个列
+     * 科室信息表-科室ID
      */
     public TableColumn<Department,Integer> colDepartmentId;
+
+    /**
+     * 科室信息表-科室名称
+     */
     public TableColumn<Department,String> colDepartmentName;
+
+    /**
+     * 科室信息表-系主任
+     */
     public TableColumn<Department,String> colDepartmentDean;
 
     /**
@@ -242,6 +324,88 @@ public class ManagerController implements Initializable {
      * 医师搜索
      */
     public void onClickDoctorSearch() {
+        //如果搜索栏没有内容，则显示全部数据
+        if(fieldDoctorSearch.getText().equals("")){
+            setDoctorData(this.doctorData);
+        }
+
+        //找到对应名字的所有医生
+        else {
+            ObservableList<Doctor> doctorMach = FXCollections.observableArrayList();
+            //查找到对应的医生
+            for (Doctor doctor : doctorData) {
+                if (doctor.getName().equals(fieldDoctorSearch.getText())) {
+                    doctorMach.add(doctor);
+                }
+            }
+            setDoctorData(doctorMach);
+        }
+    }
+
+    /**
+     * 药品信息查询
+     */
+    public void onClickMedicineSearch() {
+        //如果搜索栏没有内容，则显示全部数据
+        if(fieldMedicineSearch.getText().equals("")){
+            setMedicineData(this.medicineData);
+        }
+
+        //找到对应名称的所有药品
+        else {
+            ObservableList<Medicine> medicineMach = FXCollections.observableArrayList();
+            //查找到对应的药品
+            for (Medicine medicine : medicineData) {
+                if (medicine.getName().equals(fieldMedicineSearch.getText())) {
+                    medicineMach.add(medicine);
+                }
+            }
+            setMedicineData(medicineMach);
+        }
+    }
+
+    /**
+     * 病房信息查询
+     */
+    public void onClickWarnSearch() {
+        //如果搜索栏没有内容，则显示全部数据
+        if(fieldWardSearch.getText().equals("")){
+            setWardData(this.wardData);
+        }
+
+        //找到对应房间号的所有病房
+        else {
+            ObservableList<Ward> wardMach = FXCollections.observableArrayList();
+            //查找到对应的病房
+            for (Ward ward : wardData) {
+                if (ward.getNumber().equals(fieldWardSearch.getText())) {
+                    wardMach.add(ward);
+                }
+            }
+            setWardData(wardMach);
+        }
+    }
+
+    /**
+     * 科室信息查询
+     */
+    public void onClickDepartmentSearch() {
+        //如果搜索栏没有内容，则显示全部数据
+        if(fieldDepartmentSearch.getText().equals("")){
+            setDepartmentData(departmentData);
+        }
+
+        //找到对应房间号的所有病房
+        else {
+            ObservableList<Department> departmentMach = FXCollections.observableArrayList();
+            //查找到对应的病房
+            for (Department department : departmentData) {
+                if (department.getDepartmentName().equals(fieldDepartmentSearch.getText())) {
+                    departmentMach.add(department);
+                }
+            }
+            setDepartmentData(departmentMach);
+        }
     }
 
     /**
@@ -278,7 +442,7 @@ public class ManagerController implements Initializable {
                 doctorIntegerCellDataFeatures -> new SimpleStringProperty(doctorIntegerCellDataFeatures.getValue().getEmail())
         );
         colDoctorFee.setCellValueFactory(
-                doctorIntegerCellDataFeatures -> new SimpleIntegerProperty(doctorIntegerCellDataFeatures.getValue().getRegisterFee()).asObject()
+                doctorIntegerCellDataFeatures -> new SimpleStringProperty(""+doctorIntegerCellDataFeatures.getValue().getRegisterFee())
         );
 
         //向表中导入数据
@@ -340,8 +504,45 @@ public class ManagerController implements Initializable {
         tabWardInfo.setItems(wardData);
     }
 
+    /**
+     * 修改表格内容后，对数据库内容进行修改
+     */
+    public void onEditMedicine() {
+        new Alert(Alert.AlertType.INFORMATION, "修改成功").showAndWait();
+    }
+
+    /**
+     * 初始化操作
+     * @param url:
+     * @param resourceBundle:
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //使药品表格中的各个行可进行修改
+        for(TableColumn<Medicine,String> medicineStringTableColumn:
+                Arrays.asList(colMedicineName,colMedicineDosage,colMedicineSpecifications,
+                        colMedicineIntroduction,colMedicinePrice,colMedicineType)){
+            medicineStringTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        }
 
+        //使医师表格中的各个行可进行修改
+        for (TableColumn<Doctor, String> doctorStringTableColumn :
+                Arrays.asList(colDoctorName, colDoctorSex, colDoctorBirthday, colDoctorWorkingDay,
+                        colDoctorDepartment, colDoctorJob, colDoctorFee, colDoctorPone, colDoctorEmail,
+                        colDoctorExpert)) {
+            doctorStringTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        }
+
+        //使病房表格中的各行可进行修改
+        for (TableColumn<Ward, String> wardStringTableColumn :
+                Arrays.asList(colWardRoomNum,colWardCapacity,colWardType,colWardUsed,colWardRemarks)) {
+            wardStringTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        }
+
+        //使科室表格中的各行可进行修改
+        for (TableColumn<Department, String> departmentStringTableColumn :
+                Arrays.asList(colDepartmentName,colDepartmentDean)) {
+            departmentStringTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        }
     }
 }

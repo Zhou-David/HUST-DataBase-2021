@@ -1,7 +1,9 @@
 package HospitalManagementSystem.controller;
 
 import HospitalManagementSystem.function.Func;
-import HospitalManagementSystem.model.*;
+import HospitalManagementSystem.model.Department;
+import HospitalManagementSystem.model.Doctor;
+import HospitalManagementSystem.model.Main;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
@@ -10,9 +12,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+/**
+ * 医师服务界面控制器
+ */
 public class DoctorServiceController implements Initializable {
     /**
      * 返回按钮1
@@ -73,8 +79,6 @@ public class DoctorServiceController implements Initializable {
      * 个人信息提交按钮
      */
     public Button btnSubmit;
-
-
 
     /**
      * 医师服务界面APP
@@ -160,6 +164,28 @@ public class DoctorServiceController implements Initializable {
      * 信息修改提交
      */
     public void onClickSubmit() {
+        try {
+            String sql;
+            ResultSet rs;
+            sql="SELECT id FROM 科室信息 WHERE 科室名称='"+cbxDepartment.getValue()+"'";
+            rs=Func.statement.executeQuery(sql);
+            rs.next();
+            sql="UPDATE 医生信息 " +
+                    "SET 姓名='"+fieldName.getText()+
+                    "',性别='"+cbxSex.getValue()+
+                    "',出生日期='"+dateBirthday.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+
+                    "',入职日期='"+dateWorkingDay.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+
+                    "',所属科室="+rs.getInt(1)+
+                    ",职务='"+fieldJob.getText()+
+                    "',电话号码='"+fieldPhone.getText()+
+                    "',电子邮箱='"+fieldEmail.getText()+
+                    "',挂号费="+fieldRegisterFee.getText()+
+                    " WHERE id="+doctorID;
+            int len=Func.statement.executeUpdate(sql);
+            new Alert(Alert.AlertType.INFORMATION, len>0?"修改成功":"修改失败").showAndWait();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override

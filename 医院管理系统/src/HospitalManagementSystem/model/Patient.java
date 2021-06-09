@@ -4,6 +4,9 @@ import HospitalManagementSystem.function.Func;
 
 import java.util.Date;
 
+/**
+ * 病人类型
+ */
 public class Patient {
     /**
      * 病人人员id
@@ -93,6 +96,10 @@ public class Patient {
         return phone;
     }
 
+    /**
+     * 获取病人证件号
+     * @return :证件号
+     */
     public String getIDCard() {
         return IDCard;
     }

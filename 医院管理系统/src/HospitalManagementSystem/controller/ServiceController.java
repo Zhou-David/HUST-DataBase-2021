@@ -19,6 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+/**
+ * 病人服务界面控制器
+ */
 public class ServiceController implements Initializable {
     /**
      * 病人姓名
@@ -106,31 +109,83 @@ public class ServiceController implements Initializable {
     public Button btnReturn4;
 
     /**
-     * 医师信息表各个列
+     * 医师信息表-姓名
      */
     public TableColumn<Doctor,String> colDoctorName;
+
+    /**
+     * 医师信息表-年龄
+     */
     public TableColumn<Doctor,Integer> colDoctorAge;
+
+    /**
+     * 医师信息表-工作时间
+     */
     public TableColumn<Doctor,Integer> colDoctorWorking;
+
+    /**
+     * 医师信息表-科室
+     */
     public TableColumn<Doctor,String> colDoctorDepartment;
+
+    /**
+     * 医师信息表-等级
+     */
     public TableColumn<Doctor,String> colDoctorLevel;
+
+    /**
+     * 医师信息表-挂号费
+     */
     public TableColumn<Doctor,Integer> colDoctorFee;
 
     /**
-     * 药品信息表各个列
+     * 药品信息表-名称
      */
     public TableColumn<Medicine,String> colMedicineName;
-    public TableColumn<Medicine,String> colMedicineDosage;
-    public TableColumn<Medicine,String> colMedicineSpecifications;
-    public TableColumn<Medicine,String> colMedicineIntroduction;
-    public TableColumn<Medicine,Integer> colMedicinePrice;
 
     /**
-     * 病房信息表各个列
+     * 药品信息表-剂型
+     */
+    public TableColumn<Medicine,String> colMedicineDosage;
+
+    /**
+     * 药品信息表-规格
+     */
+    public TableColumn<Medicine,String> colMedicineSpecifications;
+
+    /**
+     * 药品信息表-使用说明
+     */
+    public TableColumn<Medicine,String> colMedicineIntroduction;
+
+    /**
+     * 药品信息表-价格
+     */
+    public TableColumn<Medicine,String> colMedicinePrice;
+
+    /**
+     * 病房信息表-房间号
      */
     public TableColumn<Ward,String> colWardNumber;
-    public TableColumn<Ward,Integer> colWardCapacity;
+
+    /**
+     * 病房信息表-房间容量
+     */
+    public TableColumn<Ward,String> colWardCapacity;
+
+    /**
+     * 病房信息表-病房类型
+     */
     public TableColumn<Ward,String> colWardType;
-    public TableColumn<Ward,Integer> colWardUsed;
+
+    /**
+     * 病房信息表-入住人数
+     */
+    public TableColumn<Ward,String> colWardUsed;
+
+    /**
+     * 病房信息表-备注
+     */
     public TableColumn<Ward,String> colWardRemarks;
 
     /**
