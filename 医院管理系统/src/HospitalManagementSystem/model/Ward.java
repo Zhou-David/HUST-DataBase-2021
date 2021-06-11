@@ -12,17 +12,17 @@ public class Ward {
     /**
      * 房间门牌号
      */
-    private final String number;
+    private String number;
 
     /**
      * 房间容量
      */
-    private final int capacity;
+    private int capacity;
 
     /**
      * 房间类型
      */
-    private final String type;
+    private String type;
 
     /**
      * 入住人数
@@ -32,7 +32,7 @@ public class Ward {
     /**
      * 备注
      */
-    private final String remarks;
+    private String remarks;
 
     /**
      * 构造函数
@@ -106,5 +106,37 @@ public class Ward {
      */
     public String getRemarks() {
         return remarks;
+    }
+
+    /**
+     * 设置房间号
+     * @param number:房间号
+     */
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    /**
+     * 设置房间容量
+     * @param capacity:房间容量
+     */
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    /**
+     * 设置房间类型
+     * @param type:房间类型
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * 设置房间备注
+     * @param remarks:备注
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

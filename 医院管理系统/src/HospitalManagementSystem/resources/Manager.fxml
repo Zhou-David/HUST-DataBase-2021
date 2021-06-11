@@ -31,12 +31,12 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <TableView fx:id="tabWardInfo" editable="true" layoutY="31.0" prefHeight="340.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
                     <columns>
-                        <TableColumn fx:id="colWardId" prefWidth="100.0" text="编号" />
-                        <TableColumn fx:id="colWardRoomNum" prefWidth="140.0" text="房间号" />
-                        <TableColumn fx:id="colWardCapacity" prefWidth="140.0" text="病房容量" />
-                        <TableColumn fx:id="colWardType" prefWidth="140.0" text="房间类型" />
-                        <TableColumn fx:id="colWardUsed" prefWidth="140.0" text="入住人数" />
-                        <TableColumn fx:id="colWardRemarks" prefWidth="140.0" text="备注" />
+                        <TableColumn fx:id="colWardId" onEditCommit="#onEditWarn" prefWidth="100.0" text="编号" />
+                        <TableColumn fx:id="colWardRoomNum" onEditCommit="#onEditWarn" prefWidth="140.0" text="房间号" />
+                        <TableColumn fx:id="colWardCapacity" onEditCommit="#onEditWarn" prefWidth="140.0" text="病房容量" />
+                        <TableColumn fx:id="colWardType" onEditCommit="#onEditWarn" prefWidth="140.0" text="房间类型" />
+                        <TableColumn fx:id="colWardUsed" onEditCommit="#onEditWarn" prefWidth="140.0" text="入住人数" />
+                        <TableColumn fx:id="colWardRemarks" onEditCommit="#onEditWarn" prefWidth="140.0" text="备注" />
                     </columns>
                 </TableView>
                 <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="0.0">
@@ -82,16 +82,16 @@
                 <TableView fx:id="tabDoctorInfo" editable="true" layoutY="31.0" prefHeight="340.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
                     <columns>
                         <TableColumn fx:id="colDoctorId" prefWidth="45.0" text="编号" />
-                        <TableColumn fx:id="colDoctorName" prefWidth="70.0" text="姓名" />
-                        <TableColumn fx:id="colDoctorSex" prefWidth="60.0" text="性别" />
-                        <TableColumn fx:id="colDoctorBirthday" text="出生日期" />
-                        <TableColumn fx:id="colDoctorWorkingDay" text="入职日期" />
-                        <TableColumn fx:id="colDoctorDepartment" prefWidth="70.0" text="所属科室" />
-                        <TableColumn fx:id="colDoctorJob" text="职务" />
-                        <TableColumn fx:id="colDoctorFee" prefWidth="70.0" text="挂号费" />
-                        <TableColumn fx:id="colDoctorPone" text="电话号码" />
-                        <TableColumn fx:id="colDoctorEmail" text="电子邮箱" />
-                        <TableColumn fx:id="colDoctorExpert" prefWidth="70.0" text="是否专家" />
+                        <TableColumn fx:id="colDoctorName" onEditCommit="#onEditDoctor" prefWidth="70.0" text="姓名" />
+                        <TableColumn fx:id="colDoctorSex" onEditCommit="#onEditDoctor" prefWidth="60.0" text="性别" />
+                        <TableColumn fx:id="colDoctorBirthday" onEditCommit="#onEditDoctor" text="出生日期" />
+                        <TableColumn fx:id="colDoctorWorkingDay" onEditCommit="#onEditDoctor" text="入职日期" />
+                        <TableColumn fx:id="colDoctorDepartment" onEditCommit="#onEditDoctor" prefWidth="70.0" text="所属科室" />
+                        <TableColumn fx:id="colDoctorJob" onEditCommit="#onEditDoctor" text="职务" />
+                        <TableColumn fx:id="colDoctorFee" onEditCommit="#onEditDoctor" prefWidth="70.0" text="挂号费" />
+                        <TableColumn fx:id="colDoctorPone" onEditCommit="#onEditDoctor" text="电话号码" />
+                        <TableColumn fx:id="colDoctorEmail" onEditCommit="#onEditDoctor" text="电子邮箱" />
+                        <TableColumn fx:id="colDoctorExpert" onEditCommit="#onEditDoctor" prefWidth="70.0" text="是否专家" />
                     </columns>
                 </TableView>
                 <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="0.0">
@@ -107,8 +107,8 @@
                 <TableView fx:id="tabDepartmentInfo" editable="true" layoutY="31.0" prefHeight="340.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
                     <columns>
                         <TableColumn fx:id="colDepartmentId" prefWidth="200.0" text="编号" />
-                        <TableColumn fx:id="colDepartmentName" prefWidth="300.0" text="科室名称" />
-                        <TableColumn fx:id="colDepartmentDean" prefWidth="300.0" text="系主任" />
+                        <TableColumn fx:id="colDepartmentName" onEditCommit="#onEditDepartment" prefWidth="300.0" text="科室名称" />
+                        <TableColumn fx:id="colDepartmentDean" onEditCommit="#onEditDepartment" prefWidth="300.0" text="系主任" />
                     </columns>
                 </TableView>
                 <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="0.0">

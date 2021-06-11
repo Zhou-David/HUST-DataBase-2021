@@ -12,32 +12,32 @@ public class Medicine {
     /**
      * 药品名称
      */
-    private final String name;
+    private String name;
 
     /**
      * 剂型
      */
-    private final String dosageForm;
+    private String dosageForm;
 
     /**
      * 规格
      */
-    private final String specifications;
+    private String specifications;
 
     /**
      * 使用说明
      */
-    private final String introduction;
+    private String introduction;
 
     /**
      * 参考价格
      */
-    private final int price;
+    private int price;
 
     /**
      * 产品类别
      */
-    private final String type;
+    private String type;
 
     /**
      * 构造函数
@@ -121,6 +121,54 @@ public class Medicine {
      */
     public String getType() {
         return type;
+    }
+
+    /**
+     * 设置药品名称
+     * @param name:药品名称
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 设置剂型
+     * @param dosageForm:剂型
+     */
+    public void setDosageForm(String dosageForm) {
+        this.dosageForm = dosageForm;
+    }
+
+    /**
+     * 设置规格
+     * @param specifications:规格
+     */
+    public void setSpecifications(String specifications) {
+        this.specifications = specifications;
+    }
+
+    /**
+     * 设置使用说明
+     * @param introduction:使用说明
+     */
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    /**
+     * 设置价格
+     * @param price:价格
+     */
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    /**
+     * 设置类型
+     * @param type:类型
+     */
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**

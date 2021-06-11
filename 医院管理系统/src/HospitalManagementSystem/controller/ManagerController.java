@@ -13,7 +13,11 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -652,11 +656,303 @@ public class ManagerController implements Initializable {
     }
 
     /**
-     * 修改表格内容后，对数据库内容进行修改
+     * 修改药品信息表
+     * @param medicineStringCellEditEvent:修改信息
      */
-    public void onEditMedicine() {
-        System.out.println(colMedicineName.getCellObservableValue(1).getValue());
-        new Alert(Alert.AlertType.INFORMATION, "修改成功").showAndWait();
+    public void onEditMedicine(TableColumn.CellEditEvent<Medicine, String> medicineStringCellEditEvent) {
+        int row=medicineStringCellEditEvent.getTablePosition().getRow();
+        int column=medicineStringCellEditEvent.getTablePosition().getColumn();
+        String newValue=medicineStringCellEditEvent.getNewValue();
+
+        //按照修改的行和列，修改对应数据
+        switch (column){
+            case 1:
+                medicineData.get(row).setName(newValue);
+                break;
+            case 2:
+                medicineData.get(row).setDosageForm(newValue);
+                break;
+            case 3:
+                medicineData.get(row).setSpecifications(newValue);
+            case 4:
+                medicineData.get(row).setIntroduction(newValue);
+            case 5:
+                try {
+                    int price=Integer.parseInt(newValue);
+                    medicineData.get(row).setPrice(price);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.INFORMATION, "格式有误，修改失败").showAndWait();
+                    return;
+                }
+                break;
+            case 6:
+                medicineData.get(row).setType(newValue);
+                break;
+            default:
+                break;
+        }
+
+        Medicine medicine=medicineData.get(row);
+
+        //将修改的数据同步到数据库
+        try {
+            String sql="UPDATE 药品信息 " +
+                    "SET 名称='"+medicine.getName()+
+                    "',剂型='"+medicine.getDosageForm()+
+                    "',规格='"+medicine.getSpecifications()+
+                    "',使用说明='"+medicine.getIntroduction()+
+                    "',参考价格="+medicine.getPrice()+
+                    ",类型='"+medicine.getType()+
+                    "' WHERE id="+medicine.getId();
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "修改成功").showAndWait();
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "修改失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * 修改病房信息表
+     * @param wardStringCellEditEvent:修改信息
+     */
+    public void onEditWarn(TableColumn.CellEditEvent<Ward, String> wardStringCellEditEvent) {
+        int row=wardStringCellEditEvent.getTablePosition().getRow();
+        int column=wardStringCellEditEvent.getTablePosition().getColumn();
+        String newValue=wardStringCellEditEvent.getNewValue();
+
+        //按照修改的行和列，修改对应数据
+        switch (column){
+            case 1:
+                wardData.get(row).setNumber(newValue);
+                break;
+            case 2:
+                try {
+                    int capacity=Integer.parseInt(newValue);
+                    wardData.get(row).setCapacity(capacity);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.INFORMATION, "格式有误，修改失败").showAndWait();
+                    return;
+                }
+                break;
+            case 3:
+                wardData.get(row).setType(newValue);
+            case 5:
+                wardData.get(row).setRemarks(newValue);
+                break;
+            default:
+                break;
+        }
+
+        Ward ward=wardData.get(row);
+
+        //将修改的数据同步到数据库
+        try {
+            String sql="UPDATE 病房信息 " +
+                    "SET 病房号='"+ward.getNumber()+
+                    "',病房容量="+ward.getCapacity()+
+                    ",房间类型='"+ward.getType()+
+                    "',备注='"+ward.getRemarks()+
+                    "' WHERE id="+ward.getId();
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "修改成功").showAndWait();
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "修改失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * 修改科室信息表
+     * @param departmentStringCellEditEvent:修改信息
+     */
+    public void onEditDepartment(TableColumn.CellEditEvent<Department, String> departmentStringCellEditEvent) {
+        int row=departmentStringCellEditEvent.getTablePosition().getRow();
+        int column=departmentStringCellEditEvent.getTablePosition().getColumn();
+        String newValue=departmentStringCellEditEvent.getNewValue();
+
+        //按照修改的行和列，修改对应数据
+        switch (column){
+            case 1:
+                departmentData.get(row).setDepartmentName(newValue);
+                break;
+            case 2:
+                try {
+                    String sql="SELECT 姓名 FROM 医生信息";
+                    ResultSet rs=Func.statement.executeQuery(sql);
+                    List<String> nameList=new ArrayList<>();
+                    while(rs.next()){
+                        nameList.add(rs.getString(1));
+                    }
+                    if(nameList.contains(newValue)){
+                        departmentData.get(row).setDeanName(newValue);
+                    }
+                    else{
+                        new Alert(Alert.AlertType.INFORMATION, "医师不存在，修改失败").showAndWait();
+                        return;
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            default:
+                break;
+        }
+
+        Department department=departmentData.get(row);
+
+        //将修改的数据同步到数据库
+        try {
+            String sql;
+            sql="SELECT id FROM 医生信息 WHERE 姓名='"+department.getDeanName()+"'";
+            ResultSet rs=Func.statement.executeQuery(sql);
+            rs.next();
+            int deanId=rs.getInt(1);
+            sql="UPDATE 科室信息 " +
+                    "SET 科室名称='"+department.getDepartmentName()+
+                    "',系主任="+deanId+
+                    " WHERE id="+department.getId();
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "修改成功").showAndWait();
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "修改失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * 修改医师信息表
+     * @param doctorStringCellEditEvent:修改信息
+     */
+    public void onEditDoctor(TableColumn.CellEditEvent<Doctor, String> doctorStringCellEditEvent) {
+        int row=doctorStringCellEditEvent.getTablePosition().getRow();
+        int column=doctorStringCellEditEvent.getTablePosition().getColumn();
+        String newValue=doctorStringCellEditEvent.getNewValue();
+
+        // 指定日期格式为四位年/两位月份/两位日期，注意yyyy/MM/dd区分大小写；
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
+        //按照修改的行和列，修改对应数据
+        switch (column){
+            case 1:
+                doctorData.get(row).setName(newValue);
+                break;
+            case 2:
+                if(!newValue.equals("男")&&!newValue.equals("女")){
+                    new Alert(Alert.AlertType.INFORMATION, "性别输入错误，修改失败").showAndWait();
+                    return;
+                }
+                doctorData.get(row).setSex(newValue);
+                break;
+            case 3:
+                try {
+                    doctorData.get(row).setBirthday(format.parse(newValue));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.INFORMATION, "日期格式有误，修改失败").showAndWait();
+                    return;
+                }
+                break;
+            case 4:
+                try {
+                    doctorData.get(row).setWorkingDay(format.parse(newValue));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.INFORMATION, "日期格式有误，修改失败").showAndWait();
+                    return;
+                }
+                break;
+            case 5:
+                try {
+                    String sql="SELECT 科室名称 FROM 科室信息";
+                    ResultSet rs=Func.statement.executeQuery(sql);
+                    List<String> nameList=new ArrayList<>();
+                    while(rs.next()){
+                        nameList.add(rs.getString(1));
+                    }
+                    if(nameList.contains(newValue)){
+                        doctorData.get(row).setName(newValue);
+                    }
+                    else{
+                        new Alert(Alert.AlertType.INFORMATION, "科室不存在，修改失败").showAndWait();
+                        return;
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case 6:
+                doctorData.get(row).setJob(newValue);
+                break;
+            case 7:
+                try {
+                    int fee=Integer.parseInt(newValue);
+                    doctorData.get(row).setRegisterFee(fee);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.INFORMATION, "格式有误，修改失败").showAndWait();
+                    return;
+                }
+                break;
+            case 8:
+                doctorData.get(row).setPhoneNumber(newValue);
+                break;
+            case 9:
+                doctorData.get(row).setEmail(newValue);
+                break;
+            case 10:
+                doctorData.get(row).setExpert(newValue.equals("专家"));
+                break;
+            default:
+                break;
+        }
+
+        Doctor doctor=doctorData.get(row);
+
+        //将修改的数据同步到数据库
+        try {
+            String sql;
+            sql="SELECT id FROM 科室信息 WHERE 科室名称='"+doctor.getDepartment()+"'";
+            ResultSet rs=Func.statement.executeQuery(sql);
+            rs.next();
+            int departmentId=rs.getInt(1);
+            int expert=doctor.getIsExpert()?1:0;
+            sql="UPDATE 医生信息 " +
+                    "SET 姓名='"+doctor.getName()+
+                    "',性别='"+doctor.getSex()+
+                    "',出生日期='"+doctor.getBirthday()+
+                    "',入职日期='"+doctor.getWorkingDay()+
+                    "',所属科室="+departmentId+
+                    ",职务='"+doctor.getJob()+
+                    "',是否为专家="+expert+
+                    ",电话号码='"+doctor.getPhoneNumber()+
+                    "',电子邮箱='"+doctor.getEmail()+
+                    "',挂号费="+doctor.getRegisterFee()+
+                    " WHERE id="+doctor.getId();
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "修改成功").showAndWait();
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "修改失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**
@@ -683,7 +979,7 @@ public class ManagerController implements Initializable {
 
         //使病房表格中的各行可进行修改
         for (TableColumn<Ward, String> wardStringTableColumn :
-                Arrays.asList(colWardRoomNum,colWardCapacity,colWardType,colWardUsed,colWardRemarks)) {
+                Arrays.asList(colWardRoomNum,colWardCapacity,colWardType,colWardRemarks)) {
             wardStringTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         }
 

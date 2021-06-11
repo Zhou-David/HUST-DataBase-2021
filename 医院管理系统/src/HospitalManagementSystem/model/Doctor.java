@@ -210,6 +210,86 @@ public class Doctor {
     }
 
     /**
+     * 设置姓名
+     * @param name:姓名
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 设置性别
+     * @param sex:性别
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * 设置出生日期
+     * @param birthday:出生日期
+     */
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    /**
+     * 设置工作日期
+     * @param workingDay:工作日期
+     */
+    public void setWorkingDay(Date workingDay) {
+        this.workingDay = workingDay;
+    }
+
+    /**
+     * 设置所属科室
+     * @param department:科室
+     */
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    /**
+     * 设置职务
+     * @param job:职务
+     */
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    /**
+     * 设置是否为专家
+     * @param expert:是否为专家
+     */
+    public void setExpert(boolean expert) {
+        isExpert = expert;
+    }
+
+    /**
+     * 设置电话号码
+     * @param phoneNumber:电话号码
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * 设置邮箱
+     * @param email:邮箱
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * 设置挂号费
+     * @param registerFee:挂号费
+     */
+    public void setRegisterFee(int registerFee) {
+        this.registerFee = registerFee;
+    }
+
+    /**
      * 转换成字符串输出
      * @return :医师信息
      */

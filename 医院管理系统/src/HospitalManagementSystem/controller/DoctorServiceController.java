@@ -170,6 +170,7 @@ public class DoctorServiceController implements Initializable {
             sql="SELECT id FROM 科室信息 WHERE 科室名称='"+cbxDepartment.getValue()+"'";
             rs=Func.statement.executeQuery(sql);
             rs.next();
+            int expert=checkExpert.isSelected()?1:0;
             sql="UPDATE 医生信息 " +
                     "SET 姓名='"+fieldName.getText()+
                     "',性别='"+cbxSex.getValue()+
@@ -177,7 +178,8 @@ public class DoctorServiceController implements Initializable {
                     "',入职日期='"+dateWorkingDay.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+
                     "',所属科室="+rs.getInt(1)+
                     ",职务='"+fieldJob.getText()+
-                    "',电话号码='"+fieldPhone.getText()+
+                    "',是否为专家="+expert+
+                    ",电话号码='"+fieldPhone.getText()+
                     "',电子邮箱='"+fieldEmail.getText()+
                     "',挂号费="+fieldRegisterFee.getText()+
                     " WHERE id="+doctorID;

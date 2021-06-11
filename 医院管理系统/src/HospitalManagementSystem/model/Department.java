@@ -12,12 +12,12 @@ public class Department {
     /**
      * 科室名称
      */
-    private final String departmentName;
+    private String departmentName;
 
     /**
      * 系主任名称
      */
-    private final String deanName;
+    private String deanName;
 
     /**
      * 构造函数
@@ -61,5 +61,21 @@ public class Department {
      */
     public String getDeanName() {
         return deanName;
+    }
+
+    /**
+     * 设置科室名称
+     * @param departmentName:科室名称
+     */
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    /**
+     * 设置系主任姓名
+     * @param deanName:系主任姓名
+     */
+    public void setDeanName(String deanName) {
+        this.deanName = deanName;
     }
 }
