@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -283,6 +284,46 @@ public class ManagerController implements Initializable {
      * 医师信息表-医师编号
      */
     public TableColumn<Doctor,String> colDoctorId;
+
+    /**
+     * 添加药品按钮
+     */
+    public Button btnMedicineAdd;
+
+    /**
+     * 删除药品按钮
+     */
+    public Button btnMedicineDelete;
+
+    /**
+     * 添加病房按钮
+     */
+    public Button btnWardAdd;
+
+    /**
+     * 删除病房按钮
+     */
+    public Button btnWardDelete;
+
+    /**
+     * 添加医师按钮
+     */
+    public Button btnDoctorAdd;
+
+    /**
+     * 删除医师按钮
+     */
+    public Button btnDoctorDelete;
+
+    /**
+     * 添加科室按钮
+     */
+    public Button btnDepartmentAdd;
+
+    /**
+     * 删除科室按钮
+     */
+    public Button btnDepartmentDelete;
 
     /**
      * 从数据库导入的医师信息数据
@@ -953,6 +994,62 @@ public class ManagerController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    /**
+     * 新增药品数据
+     */
+    public void onClickMedicineAdd() {
+    }
+
+    /**
+     * 删除药品数据
+     */
+    public void onClickMedicineDelete() {
+        Medicine medicine=tabMedicineInfo.getSelectionModel().getSelectedItem();
+        medicineData.remove(medicine);
+    }
+
+    /**
+     * 新增病房数据
+     */
+    public void onClickWardAdd() {
+    }
+
+    /**
+     * 删除病房数据
+     */
+    public void onClickWardDelete() {
+        Ward ward=tabWardInfo.getSelectionModel().getSelectedItem();
+        wardData.remove(ward);
+    }
+
+    /**
+     * 新增医师数据
+     */
+    public void onClickDoctorAdd() {
+    }
+
+    /**
+     * 删除医师数据
+     */
+    public void onClickDoctorDelete() {
+        Doctor doctor=tabDoctorInfo.getSelectionModel().getSelectedItem();
+        doctorData.remove(doctor);
+    }
+
+    /**
+     * 新增科室数据
+     */
+    public void onClickDepartmentAdd() {
+    }
+
+    /**
+     * 删除科室数据
+     */
+    public void onClickDepartmentDelete() {
+        Department department=tabDepartmentInfo.getSelectionModel().getSelectedItem();
+        departmentData.remove(department);
     }
 
     /**

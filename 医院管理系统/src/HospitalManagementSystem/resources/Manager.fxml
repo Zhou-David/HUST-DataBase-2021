@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HospitalManagementSystem.controller.ManagerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HospitalManagementSystem.controller.ManagerController">
     <TabPane prefHeight="400.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <Tab text="药品管理">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -19,11 +26,13 @@
                         <TableColumn fx:id="colMedicineType" onEditCommit="#onEditMedicine" prefWidth="100.0" text="类型" />
                     </columns>
                 </TableView>
-                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="0.0">
+                <HBox alignment="CENTER" layoutX="80.0" prefHeight="28.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索药品名称" textFill="#e20d0d" />
                     <TextField fx:id="fieldMedicineSearch" prefHeight="29.0" prefWidth="348.0" />
                     <Button fx:id="btnMedicineSearch" mnemonicParsing="false" onAction="#onClickMedicineSearch" text="搜索" textFill="#1e08e4" />
                     <Button fx:id="btnReturn1" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+               <Button fx:id="btnMedicineAdd" mnemonicParsing="false" onAction="#onClickMedicineAdd" text="新增" textFill="#1e08e4" />
+               <Button fx:id="btnMedicineDelete" mnemonicParsing="false" onAction="#onClickMedicineDelete" text="删除" textFill="#1e08e4" />
                 </HBox>
             </AnchorPane>
         </Tab>
@@ -39,11 +48,13 @@
                         <TableColumn fx:id="colWardRemarks" onEditCommit="#onEditWarn" prefWidth="140.0" text="备注" />
                     </columns>
                 </TableView>
-                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="0.0">
+                <HBox alignment="CENTER" layoutX="92.0" prefHeight="28.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索病房号" textFill="#e20d0d" />
                     <TextField fx:id="fieldWardSearch" prefHeight="29.0" prefWidth="348.0" />
                     <Button fx:id="btnWardSearch" mnemonicParsing="false" onAction="#onClickWarnSearch" text="搜索" textFill="#1e08e4" />
                     <Button fx:id="btnReturn2" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+               <Button fx:id="btnWardAdd" mnemonicParsing="false" onAction="#onClickWardAdd" text="新增" textFill="#1e08e4" />
+               <Button fx:id="btnWardDelete" mnemonicParsing="false" onAction="#onClickWardDelete" text="删除" textFill="#1e08e4" />
                 </HBox>
             </AnchorPane>
         </Tab>
@@ -57,7 +68,7 @@
                         <TableColumn fx:id="colFee" prefWidth="200.0" text="费用" />
                     </columns>
                 </TableView>
-                <HBox alignment="CENTER" layoutX="167.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="0.0">
+                <HBox alignment="CENTER" layoutX="167.0" prefHeight="28.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="0.0">
                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索收入来源" textFill="#e20d0d" />
                     <TextField fx:id="fieldIncomeSearch" prefHeight="29.0" prefWidth="348.0" />
                     <Button fx:id="btnIncomeSearch" mnemonicParsing="false" onAction="#onClickFinanceSearch" text="搜索" textFill="#1e08e4" />
@@ -94,11 +105,13 @@
                         <TableColumn fx:id="colDoctorExpert" onEditCommit="#onEditDoctor" prefWidth="70.0" text="是否专家" />
                     </columns>
                 </TableView>
-                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="0.0">
+                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="28.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索医师姓名" textFill="#e20d0d" />
                     <TextField fx:id="fieldDoctorSearch" prefHeight="29.0" prefWidth="348.0" />
                     <Button fx:id="btnDoctorSearch" mnemonicParsing="false" onAction="#onClickDoctorSearch" text="搜索" textFill="#1e08e4" />
                     <Button fx:id="btnReturn4" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+               <Button fx:id="btnDoctorAdd" mnemonicParsing="false" onAction="#onClickDoctorAdd" text="新增" textFill="#1e08e4" />
+               <Button fx:id="btnDoctorDelete" mnemonicParsing="false" onAction="#onClickDoctorDelete" text="删除" textFill="#1e08e4" />
                 </HBox>
             </AnchorPane>
         </Tab>
@@ -111,11 +124,13 @@
                         <TableColumn fx:id="colDepartmentDean" onEditCommit="#onEditDepartment" prefWidth="300.0" text="系主任" />
                     </columns>
                 </TableView>
-                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="552.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="0.0">
+                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索科室名称" textFill="#e20d0d" />
                     <TextField fx:id="fieldDepartmentSearch" prefHeight="29.0" prefWidth="348.0" />
                     <Button fx:id="btnDepartmentSearch" mnemonicParsing="false" onAction="#onClickDepartmentSearch" text="搜索" textFill="#1e08e4" />
                     <Button fx:id="btnReturn5" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+               <Button fx:id="btnDepartmentAdd" mnemonicParsing="false" onAction="#onClickDepartmentAdd" text="新增" textFill="#1e08e4" />
+               <Button fx:id="btnDepartmentDelete" mnemonicParsing="false" onAction="#onClickDepartmentDelete" text="删除" textFill="#1e08e4" />
                 </HBox>
             </AnchorPane>
         </Tab>
