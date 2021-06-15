@@ -1,5 +1,6 @@
 package HospitalManagementSystem.function;
 
+import HospitalManagementSystem.model.Doctor;
 import HospitalManagementSystem.model.Medicine;
 import HospitalManagementSystem.model.Ward;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -189,5 +190,19 @@ public class Func {
         colWardRemarks.setCellValueFactory(
                 wardStringCellDataFeatures -> new SimpleStringProperty(wardStringCellDataFeatures.getValue().getRemarks())
         );
+    }
+
+    /**
+     * 设置医师信息
+     * @param resultSet:查询结果
+     * @return :在数据库中查询到的医师信息所建立的医师类实体
+     * @throws SQLException:异常捕获
+     */
+    public static Doctor setDoctorInfo(ResultSet resultSet) throws SQLException {
+        resultSet.next();
+        return new Doctor(
+                resultSet.getInt(1), resultSet.getString(2),resultSet.getString(3), resultSet.getDate(4), resultSet.getDate(5),
+                resultSet.getString(6), resultSet.getString(7), resultSet.getInt(8) == 1, resultSet.getString(9), resultSet.getString(10),
+                resultSet.getInt(11));
     }
 }

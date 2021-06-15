@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -16,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -286,19 +286,9 @@ public class ManagerController implements Initializable {
     public TableColumn<Doctor,String> colDoctorId;
 
     /**
-     * 添加药品按钮
-     */
-    public Button btnMedicineAdd;
-
-    /**
      * 删除药品按钮
      */
     public Button btnMedicineDelete;
-
-    /**
-     * 添加病房按钮
-     */
-    public Button btnWardAdd;
 
     /**
      * 删除病房按钮
@@ -306,24 +296,164 @@ public class ManagerController implements Initializable {
     public Button btnWardDelete;
 
     /**
-     * 添加医师按钮
-     */
-    public Button btnDoctorAdd;
-
-    /**
      * 删除医师按钮
      */
     public Button btnDoctorDelete;
 
     /**
-     * 添加科室按钮
-     */
-    public Button btnDepartmentAdd;
-
-    /**
      * 删除科室按钮
      */
     public Button btnDepartmentDelete;
+
+    /**
+     * 添加病房-病房号
+     */
+    public TextField fieldAddWardNum;
+
+    /**
+     * 添加病房-病房容量
+     */
+    public TextField fieldAddWardCapacity;
+
+    /**
+     * 添加病房-病房类型
+     */
+    public TextField fieldAddWardType;
+
+    /**
+     * 添加病房-病房备注
+     */
+    public TextField fieldAddWardRemark;
+
+    /**
+     * 添加病房提交按钮
+     */
+    public Button btnAddWardSubmit;
+
+    /**
+     * 返回按钮6
+     */
+    public Button btnReturn6;
+
+    /**
+     * 添加药品-药品名称
+     */
+    public TextField fieldAddMedicineName;
+
+    /**
+     * 添加药品-药品剂型
+     */
+    public TextField fieldAddMedicineDosage;
+
+    /**
+     * 添加药品-药品规格
+     */
+    public TextField fieldAddMedicineSpecifications;
+
+    /**
+     * 添加药品提交按钮
+     */
+    public Button btnAddMedicineSubmit;
+
+    /**
+     * 添加药品-使用说明
+     */
+    public TextField fieldAddMedicineIntroduction;
+
+    /**
+     * 添加药品-参考价格
+     */
+    public TextField fieldAddMedicinePrice;
+
+    /**
+     * 添加药品-药品类型
+     */
+    public TextField fieldAddMedicineType;
+
+    /**
+     * 返回按钮7
+     */
+    public Button btnReturn7;
+
+    /**
+     * 添加医师-姓名
+     */
+    public TextField fieldAddDoctorName;
+
+    /**
+     * 添加医师-性别
+     */
+    public ChoiceBox<String> cbxAddDoctorSex;
+
+    /**
+     * 添加医师-生日
+     */
+    public DatePicker dateAddDoctorBirthday;
+
+    /**
+     * 添加医师-工作日期
+     */
+    public DatePicker dateAddDoctorWorkingDay;
+
+    /**
+     * 添加医师-所属科室
+     */
+    public ChoiceBox<String> cbxAddDoctorDepartment;
+
+    /**
+     * 添加医师-职务
+     */
+    public TextField fieldAddDoctorJob;
+
+    /**
+     * 添加医师-电话号码
+     */
+    public TextField fieldAddDoctorPhone;
+
+    /**
+     * 添加医师-电子邮箱
+     */
+    public TextField fieldAddDoctorEmail;
+
+    /**
+     * 添加医师-挂号费
+     */
+    public TextField fieldAddDoctorRegisterFee;
+
+    /**
+     * 添加医师-是否为专家
+     */
+    public CheckBox checkAddDoctorExpert;
+
+    /**
+     * 添加医师提交按钮
+     */
+    public Button btnAddDoctorSubmit;
+
+    /**
+     * 返回按钮8
+     */
+    public Button btnReturn8;
+
+    /**
+     * 添加科室-科室名称
+     */
+    public TextField fieldAddDepartmentName;
+
+    /**
+     * 添加科室-系主任
+     */
+    public TextField fieldAddDepartmentDean;
+
+    /**
+     * 返回按钮9
+     */
+    public Button btnReturn9;
+
+    /**
+     * 添加科室提交按钮
+     */
+    public Button btnAddDepartmentSubmit;
 
     /**
      * 从数据库导入的医师信息数据
@@ -365,7 +495,8 @@ public class ManagerController implements Initializable {
         //在科室管理中导入数据
         try {
             String sql;
-            sql = "SELECT 科室信息.id, 科室名称, 姓名 FROM 科室信息 JOIN 医生信息 医 on 医.id = 科室信息.系主任";
+            sql = "SELECT 科室信息.id, 科室名称, 姓名 FROM 科室信息 LEFT JOIN 医生信息 医 on 医.id = 科室信息.系主任 "+
+                    "ORDER BY 科室信息.id";
             ResultSet rs = Func.statement.executeQuery(sql);
             while (rs.next()) {
                 Department department = new Department(
@@ -381,7 +512,9 @@ public class ManagerController implements Initializable {
         //在个人信息和医师管理中导入数据
         try {
             String sql;
-            sql = "SELECT 医.id, 姓名, 性别, 出生日期, 入职日期, 科室名称, 职务, 是否为专家, 电话号码, 电子邮箱,挂号费 FROM 医生信息 医 JOIN 科室信息 科 on 医.所属科室 = 科.id";
+            sql = "SELECT 医.id, 姓名, 性别, 出生日期, 入职日期, 科室名称, 职务, 是否为专家, 电话号码, 电子邮箱,挂号费 " +
+                    "FROM 医生信息 医 JOIN 科室信息 科 on 医.所属科室 = 科.id "+
+                    "ORDER BY 医.id";
             ResultSet rs = Func.statement.executeQuery(sql);
             while (rs.next()) {
                 Doctor doctor = new Doctor(
@@ -398,7 +531,7 @@ public class ManagerController implements Initializable {
         //在药品管理中导入数据
         try {
             String sql;
-            sql = "SELECT * FROM 药品信息";
+            sql = "SELECT * FROM 药品信息 ORDER BY id";
             ResultSet rs = Func.statement.executeQuery(sql);
             while (rs.next()) {
                 Medicine medicine = new Medicine(
@@ -415,7 +548,7 @@ public class ManagerController implements Initializable {
         //在病房管理中导入数据
         try {
             String sql;
-            sql = "SELECT * FROM 病房信息";
+            sql = "SELECT * FROM 病房信息 ORDER BY id";
             ResultSet rs = Func.statement.executeQuery(sql);
             while (rs.next()) {
                 Ward ward = new Ward(
@@ -456,6 +589,14 @@ public class ManagerController implements Initializable {
 
         //总收入
         labTotalIncome.setText(""+totalIncome);
+
+        //性别选项
+        cbxAddDoctorSex.getItems().setAll("男","女");
+
+        //科室选项
+        for(Department department:departmentData) {
+            cbxAddDoctorDepartment.getItems().add(department.getDepartmentName());
+        }
     }
 
     /**
@@ -884,8 +1025,8 @@ public class ManagerController implements Initializable {
         int column=doctorStringCellEditEvent.getTablePosition().getColumn();
         String newValue=doctorStringCellEditEvent.getNewValue();
 
-        // 指定日期格式为四位年/两位月份/两位日期，注意yyyy/MM/dd区分大小写；
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        // 指定日期格式为四位年-两位月份-两位日期，注意yyyy-MM-dd区分大小写；
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         //按照修改的行和列，修改对应数据
         switch (column){
@@ -975,8 +1116,8 @@ public class ManagerController implements Initializable {
             sql="UPDATE 医生信息 " +
                     "SET 姓名='"+doctor.getName()+
                     "',性别='"+doctor.getSex()+
-                    "',出生日期='"+doctor.getBirthday()+
-                    "',入职日期='"+doctor.getWorkingDay()+
+                    "',出生日期='"+format.format(doctor.getBirthday())+
+                    "',入职日期='"+format.format(doctor.getWorkingDay())+
                     "',所属科室="+departmentId+
                     ",职务='"+doctor.getJob()+
                     "',是否为专家="+expert+
@@ -1000,34 +1141,152 @@ public class ManagerController implements Initializable {
      * 新增药品数据
      */
     public void onClickMedicineAdd() {
+        try {
+            int id=medicineData.get(medicineData.size()-1).getId()+1;
+            String sql="INSERT INTO 药品信息 VALUES("+id+
+                    ",'"+fieldAddMedicineName.getText()+
+                    "','"+fieldAddMedicineDosage.getText()+
+                    "','"+fieldAddMedicineSpecifications.getText()+
+                    "','"+fieldAddMedicineIntroduction.getText()+
+                    "',"+fieldAddMedicinePrice.getText()+
+                    ",'"+fieldAddMedicineType.getText()+"')";
+            Medicine medicine=new Medicine(id,fieldAddMedicineName.getText(),fieldAddMedicineDosage.getText(),
+                    fieldAddMedicineSpecifications.getText(),fieldAddMedicineIntroduction.getText(),
+                    Integer.parseInt(fieldAddMedicinePrice.getText()),fieldAddMedicineType.getText());
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "添加成功").showAndWait();
+                medicineData.add(medicine);
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "添加失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.INFORMATION, "格式有误，修改失败").showAndWait();
+        }
     }
 
     /**
      * 删除药品数据
      */
     public void onClickMedicineDelete() {
+        //从列表中删除对应数据
         Medicine medicine=tabMedicineInfo.getSelectionModel().getSelectedItem();
         medicineData.remove(medicine);
+
+        //从数据库中删除对应数据
+        try {
+            String sql="DELETE FROM 药品信息 WHERE id="+medicine.getId();
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "删除成功").showAndWait();
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "删除失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**
      * 新增病房数据
      */
     public void onClickWardAdd() {
+        try {
+            int id=wardData.get(wardData.size()-1).getId()+1;
+            String sql="INSERT INTO 病房信息 VALUES("+id+
+                    ",'"+fieldAddWardNum.getText()+
+                    "',"+fieldAddWardCapacity.getText()+
+                    ",'"+fieldAddWardType.getText()+
+                    "',"+0+
+                    ",'"+fieldAddWardRemark.getText()+"')";
+            Ward ward=new Ward(id,fieldAddWardNum.getText(),Integer.parseInt(fieldAddWardCapacity.getText()),
+                    fieldAddWardType.getText(),0,fieldAddWardRemark.getText());
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "添加成功").showAndWait();
+                wardData.add(ward);
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "添加失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.INFORMATION, "格式有误，修改失败").showAndWait();
+        }
     }
 
     /**
      * 删除病房数据
      */
     public void onClickWardDelete() {
+        //从列表中删除对应数据
         Ward ward=tabWardInfo.getSelectionModel().getSelectedItem();
         wardData.remove(ward);
+
+        //从数据库中删除对应数据
+        try {
+            String sql="DELETE FROM 病房信息 WHERE id="+ward.getId();
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "删除成功").showAndWait();
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "删除失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**
      * 新增医师数据
      */
     public void onClickDoctorAdd() {
+        try {
+            int id=doctorData.get(doctorData.size()-1).getId()+1;
+            int expert=checkAddDoctorExpert.isSelected()?1:0;
+
+            String strBirthday=dateAddDoctorBirthday.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String strWorkingDay=dateAddDoctorWorkingDay.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+            String sql="SELECT id FROM 科室信息 WHERE 科室名称='"+cbxAddDoctorDepartment.getValue()+"'";
+            ResultSet rs=Func.statement.executeQuery(sql);
+            rs.next();
+
+            sql="INSERT INTO 医生信息 VALUES("+id+
+                    ",'"+fieldAddDoctorName.getText()+
+                    "','"+cbxAddDoctorSex.getValue()+
+                    "','"+strBirthday+
+                    "','"+strWorkingDay+
+                    "',"+rs.getInt(1)+
+                    ",'"+fieldAddDoctorJob.getText()+
+                    "',"+expert+
+                    ",'"+fieldAddDoctorPhone.getText()+
+                    "','"+fieldAddDoctorEmail.getText()+
+                    "',"+fieldAddDoctorRegisterFee.getText()+")";
+            int len=Func.statement.executeUpdate(sql);
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "添加成功").showAndWait();
+                String doctorMessage = "SELECT 医.id, 姓名, 性别, 出生日期, 入职日期, 科室名称, 职务, 是否为专家, 电话号码, 电子邮箱,挂号费 FROM 医生信息 医 JOIN 科室信息 科 on 医.所属科室 = 科.id WHERE 医.id="+id;
+                ResultSet resultSet = Func.statement.executeQuery(doctorMessage);
+                doctorData.add(Func.setDoctorInfo(resultSet));
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "添加失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.INFORMATION, "格式有误，修改失败").showAndWait();
+        }
     }
 
     /**
@@ -1036,12 +1295,64 @@ public class ManagerController implements Initializable {
     public void onClickDoctorDelete() {
         Doctor doctor=tabDoctorInfo.getSelectionModel().getSelectedItem();
         doctorData.remove(doctor);
+
+        try {
+            String sql="UPDATE 科室信息 SET 系主任=null WHERE 系主任="+doctor.getId();
+            int len=Func.statement.executeUpdate(sql);
+            if(len<0){
+                new Alert(Alert.AlertType.INFORMATION, "删除失败").showAndWait();
+                return;
+            }
+            sql="DELETE FROM 医生信息 WHERE id="+doctor.getId();
+            len=Func.statement.executeUpdate(sql);
+            if(len<0){
+                new Alert(Alert.AlertType.INFORMATION, "删除失败").showAndWait();
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "删除成功").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**
      * 新增科室数据
      */
     public void onClickDepartmentAdd() {
+        try {
+            int id=departmentData.get(departmentData.size()-1).getId()+1;
+
+            String sql;
+            if(fieldAddDepartmentDean.getText().equals("")){
+                sql="INSERT INTO 科室信息 VALUES("+id+
+                        ",'"+fieldAddDepartmentName.getText()+
+                        "',"+null+")";
+            }
+            else{
+                sql="SELECT id FROM 医生信息 WHERE 姓名='"+fieldAddDepartmentDean.getText()+"'";
+                ResultSet rs=Func.statement.executeQuery(sql);
+                if(!rs.next()){
+                    new Alert(Alert.AlertType.INFORMATION, "请输入正确的医师姓名").showAndWait();
+                    return;
+                }
+                int doctorId=rs.getInt(1);
+                sql="INSERT INTO 科室信息 VALUES("+id+
+                        ",'"+fieldAddDepartmentName.getText()+
+                        "',"+doctorId+")";
+            }
+            int len=Func.statement.executeUpdate(sql);
+            Department department=new Department(id,fieldAddDepartmentName.getText(),fieldAddDepartmentDean.getText());
+            if(len>0){
+                new Alert(Alert.AlertType.INFORMATION, "添加成功").showAndWait();
+                departmentData.add(department);
+            }
+            else {
+                new Alert(Alert.AlertType.INFORMATION, "添加失败").showAndWait();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**
@@ -1049,7 +1360,26 @@ public class ManagerController implements Initializable {
      */
     public void onClickDepartmentDelete() {
         Department department=tabDepartmentInfo.getSelectionModel().getSelectedItem();
-        departmentData.remove(department);
+        try {
+            String sql="SELECT * FROM 医生信息 WHERE 所属科室="+department.getId();
+            ResultSet rs=Func.statement.executeQuery(sql);
+            if(rs.next()){
+                new Alert(Alert.AlertType.INFORMATION, "该科室下有部分医师信息，拒绝删除").showAndWait();
+            }
+            else {
+                departmentData.remove(department);
+                sql="DELETE FROM 科室信息 WHERE id="+department.getId();
+                int len=Func.statement.executeUpdate(sql);
+                if(len>0){
+                    new Alert(Alert.AlertType.INFORMATION, "删除成功").showAndWait();
+                }
+                else {
+                    new Alert(Alert.AlertType.INFORMATION, "删除失败").showAndWait();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**

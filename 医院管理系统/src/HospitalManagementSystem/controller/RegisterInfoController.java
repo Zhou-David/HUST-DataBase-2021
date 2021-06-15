@@ -121,10 +121,7 @@ public class RegisterInfoController implements Initializable {
                     "FROM 医生信息 医 JOIN 科室信息 科 on 医.所属科室 = 科.id "+
                     "WHERE 医.id="+doctorNum;
             rs = Func.statement.executeQuery(sql);
-            rs.next();
-            Doctor doctor=new Doctor(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),
-                    rs.getDate(5),rs.getString(6),rs.getString(7),rs.getInt(8)==1,rs.getString(9),
-                    rs.getString(10),rs.getInt(11));
+            Doctor doctor=Func.setDoctorInfo(rs);
             fieldDoctorName.setText(doctor.getName());
             fieldDoctorDepartment.setText(doctor.getDepartment());
             fieldDoctorJob.setText(doctor.getJob());
