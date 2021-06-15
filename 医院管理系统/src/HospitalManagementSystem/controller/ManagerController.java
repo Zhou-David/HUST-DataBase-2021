@@ -582,6 +582,32 @@ public class ManagerController implements Initializable {
                 financeData.add(finance);
             }
 
+            //获取取药费信息
+            sql="SELECT 取药时间,费用 FROM 取药单";
+            rs=Func.statement.executeQuery(sql);
+            while(rs.next()){
+                Finance finance=new Finance(
+                        count++,"取药费",
+                        rs.getDate(1)+" "+rs.getTime(1),
+                        rs.getInt(2)
+                );
+                totalIncome+=finance.getFee();
+                financeData.add(finance);
+            }
+
+            //获取住院费信息
+            sql="SELECT 出院时间,费用 FROM 出院信息";
+            rs=Func.statement.executeQuery(sql);
+            while(rs.next()){
+                Finance finance=new Finance(
+                        count++,"住院费",
+                        rs.getDate(1)+" "+rs.getTime(1),
+                        rs.getInt(2)
+                );
+                totalIncome+=finance.getFee();
+                financeData.add(finance);
+            }
+
             setFinanceData(financeData);
         } catch (SQLException e) {
             e.printStackTrace();

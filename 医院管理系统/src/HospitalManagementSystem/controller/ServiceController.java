@@ -443,7 +443,7 @@ public class ServiceController implements Initializable {
 
                 //添加新的挂号单
                 sql="INSERT INTO 挂号信息 VALUES("+registerNum+","+patientNum+","+doctorNum+
-                ",'"+df.format(new Date())+"',"+doctor.getRegisterFee()+","+(doctor.getIsExpert()?1:0)+")";
+                ",'"+df.format(new Date())+"',"+doctor.getRegisterFee()+","+(doctor.getIsExpert()?1:0)+",0)";
                 int len = Func.statement.executeUpdate(sql);
                 if(len<=0){
                     new Alert(Alert.AlertType.INFORMATION, "添加挂号信息失败！").showAndWait();

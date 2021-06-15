@@ -3,7 +3,6 @@ package HospitalManagementSystem.function;
 import HospitalManagementSystem.model.Doctor;
 import HospitalManagementSystem.model.Medicine;
 import HospitalManagementSystem.model.Ward;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TableColumn;
 
@@ -89,10 +88,12 @@ public class Func {
     public static int getYear(Date date){
         SimpleDateFormat sdf=new SimpleDateFormat();
         sdf.applyPattern("yyyy-MM-dd");
+
         Calendar cal = Calendar.getInstance();
-        int yearNow = cal.get(Calendar.YEAR);  //当前年份
-        int monthNow = cal.get(Calendar.MONTH);  //当前月份
-        int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH); //当前日期
+        int yearNow = cal.get(Calendar.YEAR);
+        int monthNow = cal.get(Calendar.MONTH);
+        int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
+
         cal.setTime(date);
         int yearBirth = cal.get(Calendar.YEAR);
         int monthBirth = cal.get(Calendar.MONTH);
