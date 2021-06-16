@@ -109,7 +109,7 @@ public class RegisterInfoController implements Initializable {
             sql = "SELECT * FROM 病人信息 WHERE id="+patientNum;
             rs = Func.statement.executeQuery(sql);
             rs.next();
-            Patient patient=new Patient(rs.getInt(1),rs.getString(2), rs.getString(3),
+            Patient patient=new Patient(rs.getInt(1), rs.getString(3),
                     rs.getString(4),rs.getDate(5),rs.getString(6));
             fieldPatientName.setText(patient.getName());
             fieldPatientSex.setText(patient.getSex());

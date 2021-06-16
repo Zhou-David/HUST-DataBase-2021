@@ -38,7 +38,7 @@ public class Func {
     /**
      * 数据库连接
      */
-    static Connection connection = null;
+    public static Connection connection = null;
 
     /**
      * 数据库操作语句
@@ -197,7 +197,7 @@ public class Func {
      * 设置医师信息
      * @param resultSet:查询结果
      * @return :在数据库中查询到的医师信息所建立的医师类实体
-     * @throws SQLException:异常捕获
+     * @throws SQLException :异常捕获
      */
     public static Doctor setDoctorInfo(ResultSet resultSet) throws SQLException {
         resultSet.next();

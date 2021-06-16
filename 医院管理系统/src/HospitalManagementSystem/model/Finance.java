@@ -1,7 +1,5 @@
 package HospitalManagementSystem.model;
 
-import java.util.Date;
-
 /**
  * 财务类型
  */

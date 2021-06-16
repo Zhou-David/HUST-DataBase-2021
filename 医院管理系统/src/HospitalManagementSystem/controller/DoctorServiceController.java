@@ -294,7 +294,7 @@ public class DoctorServiceController implements Initializable {
             String sql="SELECT * FROM 病人信息 ORDER BY id";
             ResultSet rs=Func.statement.executeQuery(sql);
             while(rs.next()){
-                Patient patient=new Patient(rs.getInt(1),rs.getString(2),rs.getString(3),
+                Patient patient=new Patient(rs.getInt(1),rs.getString(3),
                         rs.getString(4),rs.getDate(5),rs.getString(6));
                 patients.add(patient);
             }
@@ -397,6 +397,9 @@ public class DoctorServiceController implements Initializable {
     public void onClickDiagnosis() {
         //提交对此病人的诊断
         try {
+            //关闭自动提交
+            Func.connection.setAutoCommit(false);
+
             //设置时间格式
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -422,6 +425,9 @@ public class DoctorServiceController implements Initializable {
                 int len=Func.statement.executeUpdate(sql);
                 if(len<=0){
                     new Alert(Alert.AlertType.INFORMATION, "提交失败").showAndWait();
+
+                    //回滚
+                    Func.connection.rollback();
                     return;
                 }
 
@@ -444,6 +450,7 @@ public class DoctorServiceController implements Initializable {
                     len=Func.statement.executeUpdate(sql);
                     if(len<0){
                         new Alert(Alert.AlertType.INFORMATION, "提交失败").showAndWait();
+                        Func.connection.rollback();
                         return;
                     }
 
@@ -455,12 +462,13 @@ public class DoctorServiceController implements Initializable {
                 len=Func.statement.executeUpdate(sql);
                 if(len<=0){
                     new Alert(Alert.AlertType.INFORMATION, "提交失败").showAndWait();
+                    Func.connection.rollback();
                     return;
                 }
             }
 
             //当有选择病房时，则添加入院信息
-            if(!cbxWard.getValue().equals("")&&!cbxWard.getValue().equals("无选择")){
+            if(cbxWard.getValue()!=null&&!cbxWard.getValue().equals("")&&!cbxWard.getValue().equals("无选择")){
                 sql="SELECT id FROM 病房信息 WHERE 病房号='"+cbxWard.getValue()+"'";
                 rs=Func.statement.executeQuery(sql);
                 rs.next();
@@ -479,11 +487,13 @@ public class DoctorServiceController implements Initializable {
                     sql="UPDATE 病房信息 SET 入住人数=入住人数-1 WHERE id="+wardId;
                     if(Func.statement.executeUpdate(sql)<=0){
                         new Alert(Alert.AlertType.INFORMATION,"提交失败").showAndWait();
+                        Func.connection.rollback();
                         return;
                     }
                 }
                 else{
                     new Alert(Alert.AlertType.INFORMATION, "提交失败").showAndWait();
+                    Func.connection.rollback();
                     return;
                 }
             }
@@ -500,17 +510,27 @@ public class DoctorServiceController implements Initializable {
             if(len>0){
                 sql="UPDATE 挂号信息 SET 状态=1 WHERE id="+registerId;
                 if(Func.statement.executeUpdate(sql)>0){
+                    //提交sql信息
+                    Func.connection.commit();
+
                     new Alert(Alert.AlertType.INFORMATION, "提交成功").showAndWait();
                 }
                 else {
                     new Alert(Alert.AlertType.INFORMATION, "提交失败").showAndWait();
+                    Func.connection.rollback();
                 }
             }
             else {
                 new Alert(Alert.AlertType.INFORMATION, "提交失败").showAndWait();
+                Func.connection.rollback();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            try {
+                Func.connection.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         //处理下一位病人

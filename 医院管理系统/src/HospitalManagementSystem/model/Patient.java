@@ -14,11 +14,6 @@ public class Patient {
     private final int id;
 
     /**
-     * 证件号
-     */
-    private final String IDCard;
-
-    /**
      * 病人人员姓名
      */
     private final String name;
@@ -41,15 +36,13 @@ public class Patient {
     /**
      * 构造函数
      * @param id:病人id
-     * @param IDCard:证件号
      * @param name:姓名
      * @param sex:性别
      * @param birthday:出生日期
      * @param phone:电话号码
      */
-    public Patient(int id, String IDCard, String name, String sex, Date birthday, String phone) {
+    public Patient(int id, String name, String sex, Date birthday, String phone) {
         this.id = id;
-        this.IDCard = IDCard;
         this.name = name;
         this.sex = sex;
         this.birthday = birthday;
@@ -94,13 +87,5 @@ public class Patient {
      */
     public String getPhone() {
         return phone;
-    }
-
-    /**
-     * 获取病人证件号
-     * @return :证件号
-     */
-    public String getIDCard() {
-        return IDCard;
     }
 }
