@@ -132,7 +132,7 @@ public class DoctorLoginController implements Initializable {
             int userNum = rs.getInt("NUM");
 
             //添加新的用户
-            sql = "INSERT INTO 用户 VALUES("+(userNum+1)+ ",'" +fieldUser.getText()+"','"+fieldPassword.getText()+"',0,0)";
+            sql = "INSERT INTO 用户 VALUES("+(userNum+1)+ ",'" +fieldUser.getText()+"','"+fieldPassword.getText()+"',0,12)";
             int len = Func.statement.executeUpdate(sql);
             new Alert(Alert.AlertType.INFORMATION, len>0?"注册成功":"注册失败").showAndWait();
         } catch (SQLException throwables) {

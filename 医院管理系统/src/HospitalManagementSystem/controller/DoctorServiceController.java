@@ -576,10 +576,24 @@ public class DoctorServiceController implements Initializable {
      * 提交出院
      */
     public void onClickDischargedSubmit() {
+        if(fieldDischargedFee.getText().equals("")){
+            new Alert(Alert.AlertType.INFORMATION, "请输入费用！").showAndWait();
+            return;
+        }
         try {
-            String sql="";
+            String sql="SELECT COUNT(*) AS NUM FROM 出院信息";
             ResultSet rs=Func.statement.executeQuery(sql);
-        }catch (SQLException throwables) {
+            rs.next();
+            int dischargedId=rs.getInt(1)+1;
+
+            //设置时间格式
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            sql="INSERT INTO 出院信息 VALUES("+dischargedId+","+searchPatientId+","+doctorID+",'"+df.format(new Date())+
+                    "',"+Integer.parseInt(fieldDischargedFee.getText())+")";
+            int len=Func.statement.executeUpdate(sql);
+            new Alert(Alert.AlertType.INFORMATION, len>0?"提交成功":"提交失败").showAndWait();
+        }catch (SQLException | NumberFormatException throwables) {
             throwables.printStackTrace();
         }
     }
