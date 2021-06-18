@@ -481,10 +481,10 @@ public class DoctorServiceController implements Initializable {
                 admissionId=""+admitId;
 
                 sql="INSERT INTO 入院信息 VALUES("+admitId+
-                        ",'"+df.format(new Date())+"',"+patientId+","+doctorID+","+wardId+")";
+                        ",'"+df.format(new Date())+"',"+patientId+","+doctorID+","+wardId+",0)";
                 int len=Func.statement.executeUpdate(sql);
                 if(len>0){
-                    sql="UPDATE 病房信息 SET 入住人数=入住人数-1 WHERE id="+wardId;
+                    sql="UPDATE 病房信息 SET 入住人数=入住人数+1 WHERE id="+wardId;
                     if(Func.statement.executeUpdate(sql)<=0){
                         new Alert(Alert.AlertType.INFORMATION,"提交失败").showAndWait();
                         Func.connection.rollback();
@@ -577,9 +577,13 @@ public class DoctorServiceController implements Initializable {
             rs.next();
             searchPatientId=rs.getInt(1);
 
-            sql="SELECT 入住时间,病房 FROM 入院信息 WHERE 病人="+searchPatientId;
+            sql="SELECT 入住时间,病房 FROM 入院信息 WHERE 病人="+searchPatientId+" AND state=0";
             rs=Func.statement.executeQuery(sql);
-            rs.next();
+            if(!rs.next()){
+                new Alert(Alert.AlertType.INFORMATION, "未查到该病人住院").showAndWait();
+                return;
+            }
+
 
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date admissionTime= sdf.parse(rs.getString(1));
@@ -601,8 +605,31 @@ public class DoctorServiceController implements Initializable {
             return;
         }
         try {
-            String sql="SELECT COUNT(*) AS NUM FROM 出院信息";
+            Func.connection.setAutoCommit(false);
+
+            String sql="SELECT 病房 FROM 入院信息 WHERE 病人="+searchPatientId;
             ResultSet rs=Func.statement.executeQuery(sql);
+            rs.next();
+            int wardId=rs.getInt(1);
+
+            sql="UPDATE 病房信息 SET 入住人数=入住人数-1 WHERE id="+wardId;
+            int len=Func.statement.executeUpdate(sql);
+            if(len<=0){
+                new Alert(Alert.AlertType.INFORMATION, "提交失败").showAndWait();
+                Func.connection.rollback();
+                return;
+            }
+
+            sql="UPDATE 入院信息 SET state=1 WHERE 病人="+searchPatientId;
+            len=Func.statement.executeUpdate(sql);
+            if(len<=0){
+                new Alert(Alert.AlertType.INFORMATION, "提交失败").showAndWait();
+                Func.connection.rollback();
+                return;
+            }
+
+            sql="SELECT COUNT(*) AS NUM FROM 出院信息";
+            rs=Func.statement.executeQuery(sql);
             rs.next();
             int dischargedId=rs.getInt(1)+1;
 
@@ -611,7 +638,10 @@ public class DoctorServiceController implements Initializable {
 
             sql="INSERT INTO 出院信息 VALUES("+dischargedId+","+searchPatientId+","+doctorID+",'"+df.format(new Date())+
                     "',"+Integer.parseInt(fieldDischargedFee.getText())+")";
-            int len=Func.statement.executeUpdate(sql);
+            len=Func.statement.executeUpdate(sql);
+            if(len<=0){
+                Func.connection.rollback();
+            }
             new Alert(Alert.AlertType.INFORMATION, len>0?"提交成功":"提交失败").showAndWait();
         }catch (SQLException | NumberFormatException throwables) {
             throwables.printStackTrace();
