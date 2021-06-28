@@ -26,7 +26,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../../../intelliJ_IDE/Tomcat/apache-tomcat-7.0.109/lib/mysql-connector-java-8.0.23.jar!/" />
+          <root url="jar://$MODULE_DIR$/mysql-connector-java-8.0.23.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
