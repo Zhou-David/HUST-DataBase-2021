@@ -10,7 +10,8 @@ Educoder中所有关卡的代码均已导出到对应的`.sql`文件中，这里
 
 ### 配置环境
 1.  使用[IntelliJ IDEA 2021.1.1 x64](https://www.jetbrains.com/idea/download/#section=windows)打开本项目。
-2.  
+2.  点击 **文件** → **项目结构** 或者使用 **Ctrl+Shift+Alt+S** 打开如图所示界面，然后选择SDK，本项目所使用的JDK版本为 **openjdk-15** ，也可以自行添加不同的JDK版本，如果没有JDK，在IDEA中可以选择 **下载JDK...** <br>![项目结构](https://images.gitee.com/uploads/images/2021/0628/161033_e21a377e_8206880.png "屏幕截图.png") 
+3.   **重点！！：** 配置JAVAFX。
 
 #### 参与贡献
 
