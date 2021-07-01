@@ -45,7 +45,7 @@ public class Main extends Application {
      */
     public void gotoMain(){
         try {
-            MainController mainController = (MainController) replaceSceneContent("../resources/Main.fxml");
+            MainController mainController = (MainController) replaceSceneContent("/HospitalManagementSystem/resources/Main.fxml");
             mainController.setMyApp(this);
         } catch (Exception e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
@@ -57,7 +57,7 @@ public class Main extends Application {
      */
     public void gotoDoctorLogin(){
         try {
-            DoctorLoginController doctorLoginController=(DoctorLoginController) replaceSceneContent("../resources/DoctorLogin.fxml");
+            DoctorLoginController doctorLoginController=(DoctorLoginController) replaceSceneContent("/HospitalManagementSystem/resources/DoctorLogin.fxml");
             doctorLoginController.setLoginApp(this);
         } catch (Exception e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
@@ -69,7 +69,7 @@ public class Main extends Application {
      */
     public void gotoService(){
         try {
-            ServiceController serviceController=(ServiceController) replaceSceneContent("../resources/Service.fxml");
+            ServiceController serviceController=(ServiceController) replaceSceneContent("/HospitalManagementSystem/resources/Service.fxml");
             serviceController.setServiceApp(this);
         } catch (Exception e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
@@ -82,7 +82,7 @@ public class Main extends Application {
      */
     public void gotoDoctorService(int doctorID){
         try {
-            DoctorServiceController doctorServiceController=(DoctorServiceController) replaceSceneContent("../resources/DoctorService.fxml");
+            DoctorServiceController doctorServiceController=(DoctorServiceController) replaceSceneContent("/HospitalManagementSystem/resources/DoctorService.fxml");
             doctorServiceController.setDoctorServiceApp(this,doctorID);
         } catch (Exception e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
@@ -95,7 +95,7 @@ public class Main extends Application {
     public void gotoManager(){
         try {
             MINIMUM_WINDOW_WIDTH=800;
-            ManagerController managerController=(ManagerController) replaceSceneContent("../resources/Manager.fxml");
+            ManagerController managerController=(ManagerController) replaceSceneContent("/HospitalManagementSystem/resources/Manager.fxml");
             managerController.setManagerApp(this);
             MINIMUM_WINDOW_WIDTH=600;
             MINIMUM_WINDOW_HEIGHT=400;
@@ -110,7 +110,7 @@ public class Main extends Application {
      */
     public void gotoRegister(int registerNum){
         try {
-            RegisterInfoController registerInfoController=(RegisterInfoController) replaceSceneContent("../resources/RegisterInfo.fxml");
+            RegisterInfoController registerInfoController=(RegisterInfoController) replaceSceneContent("/HospitalManagementSystem/resources/RegisterInfo.fxml");
             registerInfoController.setRegisterInfoApp(this,registerNum);
         } catch (Exception e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
