@@ -6,11 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c274f33-97ef-4cf5-9baf-3f042fe72267" name="默认变更列表" comment="">
-      <change afterPath="$PROJECT_DIR$/src/HospitalManagementSystem/model/APP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/HospitalManagementSystem_jar/HospitalManagementSystem.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/HospitalManagementSystem_jar/HospitalManagementSystem.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-    </list>
+    <list default="true" id="7c274f33-97ef-4cf5-9baf-3f042fe72267" name="默认变更列表" comment="添加bat脚本文件，可直接运行医院管理系统" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,8 +100,30 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1625137810802</updated>
-      <workItem from="1625137831723" duration="1505000" />
+      <workItem from="1625137831723" duration="1857000" />
     </task>
+    <task id="LOCAL-00001" summary="添加bat脚本文件，可直接运行医院管理系统">
+      <created>1625141476788</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625141476788</updated>
+    </task>
+    <task id="LOCAL-00002" summary="添加bat脚本文件，可直接运行医院管理系统">
+      <created>1625141602790</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1625141602790</updated>
+    </task>
+    <task id="LOCAL-00003" summary="添加bat脚本文件，可直接运行医院管理系统">
+      <created>1625141708856</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1625141708856</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,5 +140,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="添加bat脚本文件，可直接运行医院管理系统" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加bat脚本文件，可直接运行医院管理系统" />
   </component>
 </project>
