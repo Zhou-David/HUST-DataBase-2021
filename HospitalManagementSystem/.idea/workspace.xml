@@ -100,7 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1625137810802</updated>
-      <workItem from="1625137831723" duration="1857000" />
+      <workItem from="1625137831723" duration="1931000" />
     </task>
     <task id="LOCAL-00001" summary="添加bat脚本文件，可直接运行医院管理系统">
       <created>1625141476788</created>
@@ -123,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625141708856</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="添加bat脚本文件，可直接运行医院管理系统">
+      <created>1625141780508</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1625141780508</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
