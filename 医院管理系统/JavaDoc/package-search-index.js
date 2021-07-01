@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"HospitalManagementSystem.controller"},{"l":"HospitalManagementSystem.function"},{"l":"HospitalManagementSystem.model"},{"l":"所有程序包","u":"allpackages-index.html"}];updateSearchResults();
