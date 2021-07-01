@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HospitalManagementSystem.controller.ManagerController">
+    <TabPane prefHeight="400.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="药品管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TableView fx:id="tabMedicineInfo" editable="true" layoutY="28.0" prefHeight="340.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                    <columns>
+                        <TableColumn fx:id="colMedicineId" onEditCommit="#onEditMedicine" prefWidth="100.0" text="编号" />
+                        <TableColumn fx:id="colMedicineName" onEditCommit="#onEditMedicine" prefWidth="100.0" text="名称" />
+                        <TableColumn fx:id="colMedicineDosage" onEditCommit="#onEditMedicine" prefWidth="100.0" text="剂型" />
+                        <TableColumn fx:id="colMedicineSpecifications" onEditCommit="#onEditMedicine" prefWidth="100.0" text="规格" />
+                        <TableColumn fx:id="colMedicineIntroduction" onEditCommit="#onEditMedicine" prefWidth="200.0" text="使用说明" />
+                        <TableColumn fx:id="colMedicinePrice" onEditCommit="#onEditMedicine" prefWidth="100.0" text="参考价格" />
+                        <TableColumn fx:id="colMedicineType" onEditCommit="#onEditMedicine" prefWidth="100.0" text="类型" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" layoutX="80.0" prefHeight="28.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索药品名称" textFill="#e20d0d" />
+                    <TextField fx:id="fieldMedicineSearch" prefHeight="29.0" prefWidth="348.0" />
+                    <Button fx:id="btnMedicineSearch" mnemonicParsing="false" onAction="#onClickMedicineSearch" text="搜索" textFill="#1e08e4" />
+                    <Button fx:id="btnReturn1" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+               <Button fx:id="btnMedicineDelete" mnemonicParsing="false" onAction="#onClickMedicineDelete" text="删除" textFill="#1e08e4" />
+                </HBox>
+            </AnchorPane>
+        </Tab>
+        <Tab text="病房管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TableView fx:id="tabWardInfo" editable="true" layoutY="31.0" prefHeight="340.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                    <columns>
+                        <TableColumn fx:id="colWardId" onEditCommit="#onEditWarn" prefWidth="100.0" text="编号" />
+                        <TableColumn fx:id="colWardRoomNum" onEditCommit="#onEditWarn" prefWidth="140.0" text="房间号" />
+                        <TableColumn fx:id="colWardCapacity" onEditCommit="#onEditWarn" prefWidth="140.0" text="病房容量" />
+                        <TableColumn fx:id="colWardType" onEditCommit="#onEditWarn" prefWidth="140.0" text="房间类型" />
+                        <TableColumn fx:id="colWardUsed" onEditCommit="#onEditWarn" prefWidth="140.0" text="入住人数" />
+                        <TableColumn fx:id="colWardRemarks" onEditCommit="#onEditWarn" prefWidth="140.0" text="备注" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" layoutX="92.0" prefHeight="28.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索病房号" textFill="#e20d0d" />
+                    <TextField fx:id="fieldWardSearch" prefHeight="29.0" prefWidth="348.0" />
+                    <Button fx:id="btnWardSearch" mnemonicParsing="false" onAction="#onClickWarnSearch" text="搜索" textFill="#1e08e4" />
+                    <Button fx:id="btnReturn2" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+               <Button fx:id="btnWardDelete" mnemonicParsing="false" onAction="#onClickWardDelete" text="删除" textFill="#1e08e4" />
+                </HBox>
+            </AnchorPane>
+        </Tab>
+        <Tab text="财务管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TableView fx:id="tabFinance" editable="true" layoutY="31.0" prefHeight="340.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                    <columns>
+                        <TableColumn fx:id="colFinanceId" prefWidth="100.0" text="编号" />
+                        <TableColumn fx:id="colFinanceFrom" prefWidth="200.0" text="收入来源" />
+                        <TableColumn fx:id="colFinanceTime" prefWidth="300.0" text="收入时间" />
+                        <TableColumn fx:id="colFee" prefWidth="200.0" text="费用" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" layoutX="167.0" prefHeight="28.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="0.0">
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索收入来源" textFill="#e20d0d" />
+                    <TextField fx:id="fieldIncomeSearch" prefHeight="29.0" prefWidth="348.0" />
+                    <Button fx:id="btnIncomeSearch" mnemonicParsing="false" onAction="#onClickFinanceSearch" text="搜索" textFill="#1e08e4" />
+                    <Button fx:id="btnReturn3" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="29.0" prefWidth="167.0" AnchorPane.bottomAnchor="342.0" AnchorPane.topAnchor="0.0">
+                    <Label text="总收入：">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="labTotalIncome" text="Label" textFill="#228003" underline="true">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                </HBox>
+            </AnchorPane>
+        </Tab>
+        <Tab text="医师管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TableView fx:id="tabDoctorInfo" editable="true" layoutY="31.0" prefHeight="340.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                    <columns>
+                        <TableColumn fx:id="colDoctorId" prefWidth="45.0" text="编号" />
+                        <TableColumn fx:id="colDoctorName" onEditCommit="#onEditDoctor" prefWidth="70.0" text="姓名" />
+                        <TableColumn fx:id="colDoctorSex" onEditCommit="#onEditDoctor" prefWidth="60.0" text="性别" />
+                        <TableColumn fx:id="colDoctorBirthday" onEditCommit="#onEditDoctor" text="出生日期" />
+                        <TableColumn fx:id="colDoctorWorkingDay" onEditCommit="#onEditDoctor" text="入职日期" />
+                        <TableColumn fx:id="colDoctorDepartment" onEditCommit="#onEditDoctor" prefWidth="70.0" text="所属科室" />
+                        <TableColumn fx:id="colDoctorJob" onEditCommit="#onEditDoctor" text="职务" />
+                        <TableColumn fx:id="colDoctorFee" onEditCommit="#onEditDoctor" prefWidth="70.0" text="挂号费" />
+                        <TableColumn fx:id="colDoctorPone" onEditCommit="#onEditDoctor" text="电话号码" />
+                        <TableColumn fx:id="colDoctorEmail" onEditCommit="#onEditDoctor" text="电子邮箱" />
+                        <TableColumn fx:id="colDoctorExpert" onEditCommit="#onEditDoctor" prefWidth="70.0" text="是否专家" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="28.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索医师姓名" textFill="#e20d0d" />
+                    <TextField fx:id="fieldDoctorSearch" prefHeight="29.0" prefWidth="348.0" />
+                    <Button fx:id="btnDoctorSearch" mnemonicParsing="false" onAction="#onClickDoctorSearch" text="搜索" textFill="#1e08e4" />
+                    <Button fx:id="btnReturn4" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+               <Button fx:id="btnDoctorDelete" mnemonicParsing="false" onAction="#onClickDoctorDelete" text="删除" textFill="#1e08e4" />
+                </HBox>
+            </AnchorPane>
+        </Tab>
+        <Tab text="科室管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TableView fx:id="tabDepartmentInfo" editable="true" layoutY="31.0" prefHeight="340.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                    <columns>
+                        <TableColumn fx:id="colDepartmentId" prefWidth="200.0" text="编号" />
+                        <TableColumn fx:id="colDepartmentName" onEditCommit="#onEditDepartment" prefWidth="300.0" text="科室名称" />
+                        <TableColumn fx:id="colDepartmentDean" onEditCommit="#onEditDepartment" prefWidth="300.0" text="系主任" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" layoutX="124.0" layoutY="-1.0" prefHeight="29.0" prefWidth="641.0" AnchorPane.bottomAnchor="342.33333333333337" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="81.0" text="搜索科室名称" textFill="#e20d0d" />
+                    <TextField fx:id="fieldDepartmentSearch" prefHeight="29.0" prefWidth="348.0" />
+                    <Button fx:id="btnDepartmentSearch" mnemonicParsing="false" onAction="#onClickDepartmentSearch" text="搜索" textFill="#1e08e4" />
+                    <Button fx:id="btnReturn5" mnemonicParsing="false" onAction="#onClickReturn" text="返回" textFill="#1e08e4" />
+               <Button fx:id="btnDepartmentDelete" mnemonicParsing="false" onAction="#onClickDepartmentDelete" text="删除" textFill="#1e08e4" />
+                </HBox>
+            </AnchorPane>
+        </Tab>
+        <Tab text="新增病房">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <FlowPane alignment="CENTER" layoutX="200.0" layoutY="21.0" prefHeight="240.0" prefWidth="399.0">
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="病房号">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddWardNum"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="病房容量">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddWardCapacity"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="房间类型">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddWardType"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="备注">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddWardRemark"/>
+                    </HBox>
+                </FlowPane>
+                <Button fx:id="btnAddWardSubmit" layoutX="230.0" layoutY="279.0" mnemonicParsing="false"
+                        onAction="#onClickWardAdd" prefHeight="35.0" prefWidth="169.0" text="提交"/>
+                <Button fx:id="btnReturn6" layoutX="400.0" layoutY="279.0" mnemonicParsing="false"
+                        onAction="#onClickReturn" prefHeight="35.0" prefWidth="169.0" text="返回"/>
+            </AnchorPane>
+        </Tab>
+        <Tab text="新增药品">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <FlowPane alignment="CENTER" layoutY="46.0" prefHeight="219.0" prefWidth="399.0">
+                    <HBox alignment="CENTER" prefHeight="54.667" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="名称">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddMedicineName"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="54.667" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="剂型">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddMedicineDosage"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="54.667" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="规格">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddMedicineSpecifications"/>
+                    </HBox>
+                </FlowPane>
+                <Button fx:id="btnAddMedicineSubmit" layoutX="229.0" layoutY="282.0" mnemonicParsing="false"
+                        onAction="#onClickMedicineAdd" prefHeight="35.0" prefWidth="169.0" text="提交"/>
+                <FlowPane alignment="CENTER" layoutX="399.0" layoutY="46.0" prefHeight="219.0" prefWidth="399.0">
+                    <HBox alignment="CENTER" prefHeight="54.667" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="使用说明">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddMedicineIntroduction"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="54.667" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="参考价格">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddMedicinePrice"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="54.667" prefWidth="399.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="121.0" text="类型">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddMedicineType"/>
+                    </HBox>
+                </FlowPane>
+                <Button fx:id="btnReturn7" layoutX="398.0" layoutY="282.0" mnemonicParsing="false"
+                        onAction="#onClickReturn" prefHeight="35.0" prefWidth="169.0" text="返回"/>
+            </AnchorPane>
+        </Tab>
+        <Tab text="新增医师">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <FlowPane alignment="CENTER" layoutY="14.0" prefHeight="300.0" prefWidth="400.0">
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="姓名">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddDoctorName" prefWidth="170.0"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="性别">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <ChoiceBox fx:id="cbxAddDoctorSex" prefWidth="170.0"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="出生日期">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="dateAddDoctorBirthday" prefWidth="170.0"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="入职日期">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="dateAddDoctorWorkingDay" prefWidth="170.0"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="所属科室">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <ChoiceBox fx:id="cbxAddDoctorDepartment" prefWidth="170.0"/>
+                    </HBox>
+                </FlowPane>
+                <FlowPane alignment="CENTER" layoutX="400.0" layoutY="14.0" prefHeight="300.0" prefWidth="400.0">
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="职务">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddDoctorJob" prefWidth="170.0"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="电话号码">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddDoctorPhone" prefWidth="170.0"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="电子邮箱">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddDoctorEmail" prefWidth="170.0"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0"
+                               prefWidth="114.0" text="挂号费">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddDoctorRegisterFee" prefWidth="170.0"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                        <CheckBox fx:id="checkAddDoctorExpert" mnemonicParsing="false" text="是否为专家">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </CheckBox>
+                    </HBox>
+                </FlowPane>
+                <Button fx:id="btnAddDoctorSubmit" layoutX="230.0" layoutY="314.0" mnemonicParsing="false"
+                        onAction="#onClickDoctorAdd" prefHeight="35.0" prefWidth="169.0" text="提交"/>
+                <Button fx:id="btnReturn8" layoutX="400.0" layoutY="314.0" mnemonicParsing="false"
+                        onAction="#onClickReturn" prefHeight="35.0" prefWidth="169.0" text="返回"/>
+            </AnchorPane>
+        </Tab>
+        <Tab text="新增科室">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <FlowPane alignment="CENTER" layoutX="203.0" layoutY="14.0" prefHeight="260.0" prefWidth="373.0">
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="373.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="78.0"
+                               text="科室名称">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddDepartmentName"/>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="373.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="78.0"
+                               text="系主任">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="fieldAddDepartmentDean"/>
+                    </HBox>
+                </FlowPane>
+                <Button fx:id="btnReturn9" layoutX="377.0" layoutY="296.0" mnemonicParsing="false"
+                        onAction="#onClickReturn" prefHeight="35.0" prefWidth="169.0" text="返回"/>
+                <Button fx:id="btnAddDepartmentSubmit" layoutX="208.0" layoutY="296.0" mnemonicParsing="false"
+                        onAction="#onClickDepartmentAdd" prefHeight="35.0" prefWidth="169.0" text="提交"/>
+            </AnchorPane>
+        </Tab>
+    </TabPane>
+</AnchorPane>
