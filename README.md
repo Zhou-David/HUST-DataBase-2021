@@ -15,6 +15,7 @@ Educoder中所有关卡的代码均已导出到对应的`.sql`文件中，这里
 ![编辑配置](https://images.gitee.com/uploads/images/2021/0628/164322_de51aaf1_8206880.png "屏幕截图.png")
 
 ## 使用说明
+在HospitalManagementSystem/out/artifacts/HospitalManagementSystem_jar路径下可以找到名为 **run.bat** 的脚本文件，双击后可直接运行 **医院管理系统** 
 详细的说明可见[实验报告](实验报告.docx)，以下只作简要概括。
 
 #### 医师登录
